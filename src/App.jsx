@@ -1,11 +1,15 @@
 import React from 'react';
-import Main from './pages/Main';
+
+import Router from './shared/Router';
+import GlobalStyles from './styles/GlobalStyles';
 
 function App() {
-  const a = 2;
-  const b = '34';
-
-  return <Main></Main>;
+  return (
+    <>
+      <Router />
+      <GlobalStyles />
+    </>
+  );
 }
 
 export default App;
