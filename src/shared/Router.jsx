@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '../pages/Home';
-import Topbar from '../components/Topbar';
+import Main from '../pages/Main';
+import Header from '../components/Header';
 
 function Router() {
   return (
     <BrowserRouter>
-      <Topbar />
+      <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );
