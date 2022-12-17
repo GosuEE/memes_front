@@ -5,7 +5,6 @@ import List from '../components/List';
 function Main() {
   return (
     <>
-      <Header />
       <List />
     </>
   );

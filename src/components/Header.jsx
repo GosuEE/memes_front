@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import HomeIcon from '@mui/icons-material/Home';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import React from 'react';
+import styled from 'styled-components';
 
 function Header() {
   const [value, setValue] = React.useState(0);
@@ -14,17 +15,23 @@ function Header() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="Main Tabs">
-          <Tab label="Logo" icon={<DriveFileRenameOutlineIcon />} />
-          <Tab label="Home" icon={<HomeIcon />} />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} />
-          <Button color="inherit">Login</Button>
-        </Tabs>
-      </AppBar>
-    </Box>
+    <BoxOuter>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Tabs value={value} onChange={handleChange} aria-label="Main Tabs">
+            <Tab label="Home" icon={<HomeIcon />} />
+            <Tab label="Write" icon={<DriveFileRenameOutlineIcon />} />
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} />
+            <Button color="inherit">Logout</Button>
+          </Tabs>
+        </AppBar>
+      </Box>
+    </BoxOuter>
   );
 }
 
 export default Header;
+
+const BoxOuter = styled.div`
+  margin-top: 30px;
+`;
