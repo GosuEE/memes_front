@@ -1,0 +1,30 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": "ZI7UBejhl8N0XDFzTGhYG",
+      "content": "dsdsdsds"
+    },
+    {
+      "id": "z7ZniwdVWssQsM6ARYF2p",
+      "content": "sddsds"
+    },
+    {
+      "id": "YOutwBIEnhYRzcrwO5mfI",
+      "content": "댓글 11"
+    },
+    {
+      "id": "peLPLbg5nF-bQJCOTD2hK",
+      "content": "댓글1222"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
