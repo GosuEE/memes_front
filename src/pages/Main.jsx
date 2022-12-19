@@ -1,13 +1,16 @@
 import React from 'react';
-import Header from '../components/Header';
-import List from '../components/List';
+import List from '../components/list/List';
 
 function Main() {
+<<<<<<< Updated upstream
   return (
     <>
       <List />
     </>
   );
+=======
+  return <List />;
+>>>>>>> Stashed changes
 }
 
 export default Main;
