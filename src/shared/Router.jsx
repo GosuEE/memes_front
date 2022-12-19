@@ -14,7 +14,7 @@ function Router() {
       {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:memeId" element={<Detail />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/create" element={<Create />} />
