@@ -34,6 +34,31 @@ export const readMemes = createAsyncThunk('meme/READ_MEMES', async (payload, thu
   }
 });
 
+export const updateMemes = createAsyncThunk('meme/UPDATE_MEMES', async (payload, thunkAPI) => {
+  try {
+    const response = await axios.patch(`http://localhost:3001/memes/${payload.id}`, {
+      title: payload.title,
+      img: payload.img,
+      answerValue: payload.answerValue,
+      exam1: payload.exam1,
+      exam2: payload.exam2,
+      exam3: payload.exam3,
+    });
+    return thunkAPI.fulfillWithValue(response.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
+export const getMemeById = createAsyncThunk('meme/GET_MEME_BY_ID', async (payload, thunkAPI) => {
+  try {
+    const data = await axios.get(`http://localhost:3001/memes/${payload}`);
+    return thunkAPI.fulfillWithValue(data.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -58,6 +83,29 @@ const postSlice = createSlice({
       state.memes = action.payload;
     },
     [readMemes.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [updateMemes.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updateMemes.fulfilled]: (state, action) => {
+      state.isLoading = false;
+    },
+    [updateMemes.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [getMemeById.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getMemeById.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.meme = action.payload;
+    },
+    [getMemeById.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { TextField, Paper, Button } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import ExampleMeme from './ExampleMeme';
-import { createMeme } from '../../redux/modules/postSlice';
+import { createMeme, getMemeById, updateMemes } from '../../redux/modules/postSlice';
 
 function InputForm({ isCreate }) {
   const [title, setTitle] = useState('');
@@ -13,7 +14,10 @@ function InputForm({ isCreate }) {
   const [secondMeme, setSecondMeme] = useState('');
   const [thirdMeme, setThirdMeme] = useState('');
   // const [contents, setContents] = useState('');
+  const nowMeme = useSelector((state) => state.meme.meme);
+  console.log(nowMeme);
 
+  const { memeId } = useParams();
   const inputRef = useRef();
 
   const dispatch = useDispatch();
@@ -41,9 +45,40 @@ function InputForm({ isCreate }) {
       exam2: secondMeme,
       exam3: thirdMeme,
     };
-    console.log(meme);
     dispatch(createMeme(meme));
   }
+
+  function onUpdateHandler() {
+    const meme = {
+      title,
+      img,
+      answerValue: selectValue,
+      exam1: firstMeme,
+      exam2: secondMeme,
+      exam3: thirdMeme,
+      id: nowMeme.id,
+    };
+    dispatch(updateMemes(meme));
+  }
+
+  const initMeme = useCallback(() => {
+    if (!isCreate) dispatch(getMemeById(memeId));
+  }, [isCreate, dispatch, memeId]);
+
+  useEffect(() => {
+    initMeme();
+  }, [initMeme]);
+
+  useEffect(() => {
+    if (!isCreate) {
+      setTitle(() => nowMeme.title);
+      setImg(() => nowMeme.img);
+      setSelectValue(() => nowMeme.answerValue);
+      setFirstMeme(() => nowMeme.exam1);
+      setSecondMeme(() => nowMeme.exam2);
+      setThirdMeme(() => nowMeme.exam3);
+    }
+  }, [isCreate, nowMeme]);
 
   // function onContentsChangeHandler(event) {
   //   setContents(event.target.value);
@@ -116,8 +151,12 @@ function InputForm({ isCreate }) {
       <Button sx={{ float: 'right', ml: '15px' }} variant="outlined" color="error">
         취소
       </Button>
-      <Button onClick={() => onSubmitHandler()} sx={{ float: 'right' }} variant="outlined">
-        작성
+      <Button
+        onClick={isCreate ? onSubmitHandler : onUpdateHandler}
+        sx={{ float: 'right' }}
+        variant="outlined"
+      >
+        {isCreate ? '작성' : '수정'}
       </Button>
     </StCardPaper>
   );

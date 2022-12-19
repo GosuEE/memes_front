@@ -18,7 +18,7 @@ function Router() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/update/:postId" element={<Update />} />
+        <Route path="/update/:memeId" element={<Update />} />
       </Routes>
     </BrowserRouter>
   );

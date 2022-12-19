@@ -1,49 +1,31 @@
 {
   "memes": [
     {
-      "title": "제목",
-      "img": "blob:http://localhost:3000/552d95e8-fbb9-4567-a1cd-61c9fb2d048e",
-      "answerValue": 1,
-      "exam1": "1번",
-      "exam2": "2번",
-      "exam3": "3번",
+      "title": "제목1",
+      "img": "blob:http://localhost:3000/092388ba-5015-4c45-9351-91fdc2a129cf",
+      "answerValue": 3,
+      "exam1": "수정 내용1",
+      "exam2": "수정 내용2",
+      "exam3": "수정 내용3",
       "id": 1
     },
     {
-      "title": "제목",
-      "img": "blob:http://localhost:3000/552d95e8-fbb9-4567-a1cd-61c9fb2d048e",
+      "title": "제목1",
+      "img": "blob:http://localhost:3000/092388ba-5015-4c45-9351-91fdc2a129cf",
       "answerValue": 1,
-      "exam1": "1번",
-      "exam2": "2번",
-      "exam3": "3번",
+      "exam1": "내용1",
+      "exam2": "내용2",
+      "exam3": "내용3",
       "id": 2
     },
     {
-      "title": "제목",
-      "img": "blob:http://localhost:3000/552d95e8-fbb9-4567-a1cd-61c9fb2d048e",
+      "title": "제목1",
+      "img": "blob:http://localhost:3000/092388ba-5015-4c45-9351-91fdc2a129cf",
       "answerValue": 1,
-      "exam1": "1번",
-      "exam2": "2번",
-      "exam3": "3번",
+      "exam1": "내용1",
+      "exam2": "내용2",
+      "exam3": "내용3",
       "id": 3
-    },
-    {
-      "title": "제목1",
-      "img": "blob:http://localhost:3000/0f675b5d-22c9-40c0-a0aa-8ac9be4b875b",
-      "answerValue": "",
-      "exam1": "내용1",
-      "exam2": "내용2",
-      "exam3": "내용3",
-      "id": 4
-    },
-    {
-      "title": "제목1",
-      "img": "blob:http://localhost:3000/0f675b5d-22c9-40c0-a0aa-8ac9be4b875b",
-      "answerValue": "",
-      "exam1": "내용1",
-      "exam2": "내용2",
-      "exam3": "내용3",
-      "id": 5
     }
   ]
 }
