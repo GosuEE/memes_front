@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useEffect } from 'react';
 
 function CommentView() {
   const [comments, setComments] = useState([]);
@@ -21,10 +20,11 @@ function CommentView() {
     <div>
       {comments.map((comment) => {
         return (
-          <li>
+          <li key={comment.id}>
             {comment.id},{comment.content}
-            <button>수정</button>
+            <button type="button">수정</button>
             <button
+              type="button"
               onClick={() => {
                 commentDeleteHandler(comment.id);
               }}
