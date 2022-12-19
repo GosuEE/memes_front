@@ -92,7 +92,7 @@ function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to={`/signin`}>이미 회원 이신가요? 로그인 하러 가기</Link>
+                <Link to="/signin">이미 회원 이신가요? 로그인 하러 가기</Link>
               </Grid>
             </Grid>
           </Box>

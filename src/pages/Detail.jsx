@@ -8,11 +8,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
-import WirteComment from '../components/Detail/WriteComment';
 import TextField from '@mui/material/TextField';
 
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
+import WirteComment from '../components/Detail/WriteComment';
+
 function Detail() {
   return (
     <StBoxOuter>

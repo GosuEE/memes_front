@@ -69,7 +69,7 @@ function SignIn() {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link to={`/signup`}>회원가입</Link>
+                  <Link to="/signup">회원가입</Link>
                 </Grid>
               </Grid>
             </Box>
