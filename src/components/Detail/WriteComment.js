@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import styled from '@emotion/styled';
 
 function WirteComment() {
+  const [commentContent, setCommentContent] = useState('');
   return (
     <>
       <Box
@@ -19,7 +20,17 @@ function WirteComment() {
         autoComplete="off"
       >
         <BoxInner>
-          <TextField id="filled-required" label="댓글" variant="filled" multiline />
+          <TextField
+            id="filled-required"
+            label="댓글"
+            variant="filled"
+            multiline
+            value={commentContent}
+            onChange={(e) => {
+              setCommentContent(e.target.value);
+              console.log(commentContent);
+            }}
+          />
           <ButtonOuter>
             <Button variant="contained" endIcon={<SendIcon />} size="large"></Button>
           </ButtonOuter>
