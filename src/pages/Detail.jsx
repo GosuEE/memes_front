@@ -11,8 +11,7 @@ import Button from '@mui/material/Button';
 import WirteComment from '../components/Detail/WriteComment';
 import TextField from '@mui/material/TextField';
 import CommentView from '../components/Detail/CommentView';
-import SendIcon from '@mui/icons-material/Send';
-import Stack from '@mui/material/Stack';
+
 function Detail() {
   return (
     <StBoxOuter>
