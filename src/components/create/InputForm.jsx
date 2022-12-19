@@ -19,7 +19,6 @@ function InputForm({ isCreate }) {
 
   const { memeId } = useParams();
   const inputRef = useRef();
-
   const dispatch = useDispatch();
 
   function onTitleChangeHandler(event) {
@@ -135,19 +134,19 @@ function InputForm({ isCreate }) {
         />
       </StRadioNav>
       {/* <StContents
-        id="outlined-basic"
-        label="내용"
-        variant="outlined"
-        value={contents}
-        onChange={(event) => onContentsChangeHandler(event)}
-        multiline
-        inputProps={{
-          style: {
-            height: '300px',
-          },
-        }}
-        sx={{ width: '100%', mb: '15px' }}
-      /> */}
+      id="outlined-basic"
+      label="내용"
+      variant="outlined"
+      value={contents}
+      onChange={(event) => onContentsChangeHandler(event)}
+      multiline
+      inputProps={{
+        style: {
+          height: '300px',
+        },
+      }}
+      sx={{ width: '100%', mb: '15px' }}
+    /> */}
       <Button sx={{ float: 'right', ml: '15px' }} variant="outlined" color="error">
         취소
       </Button>
