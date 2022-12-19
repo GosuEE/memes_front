@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { TextField, Paper, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ExampleMeme from './ExampleMeme';
 import { createMeme, getMemeById, updateMemes } from '../../redux/modules/postSlice';
 
@@ -20,6 +20,7 @@ function InputForm({ isCreate }) {
   const { memeId } = useParams();
   const inputRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function onTitleChangeHandler(event) {
     setTitle(event.target.value);
@@ -45,6 +46,7 @@ function InputForm({ isCreate }) {
       exam3: thirdMeme,
     };
     dispatch(createMeme(meme));
+    navigate('/');
   }
 
   function onUpdateHandler() {
@@ -58,6 +60,7 @@ function InputForm({ isCreate }) {
       id: nowMeme.id,
     };
     dispatch(updateMemes(meme));
+    navigate(`/detail/${memeId}`);
   }
 
   const initMeme = useCallback(() => {
