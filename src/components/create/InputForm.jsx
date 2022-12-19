@@ -1,18 +1,48 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { TextField, Paper, Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import ExampleMeme from './ExampleMeme';
+import { createMeme } from '../../redux/modules/postSlice';
 
 function InputForm({ isCreate }) {
   const [title, setTitle] = useState('');
+  const [img, setImg] = useState('');
   const [selectValue, setSelectValue] = useState('');
   const [firstMeme, setFirstMeme] = useState('');
   const [secondMeme, setSecondMeme] = useState('');
   const [thirdMeme, setThirdMeme] = useState('');
   // const [contents, setContents] = useState('');
 
+  const inputRef = useRef();
+
+  const dispatch = useDispatch();
+
   function onTitleChangeHandler(event) {
     setTitle(event.target.value);
+  }
+
+  function uploadImg(event) {
+    const formData = new FormData();
+    formData.append('file', event.target.files[0]);
+    setImg(URL.createObjectURL(event.target.files[0]));
+  }
+
+  function onUploadImgHandler() {
+    inputRef.current.click();
+  }
+
+  function onSubmitHandler() {
+    const meme = {
+      title,
+      img,
+      answerValue: selectValue,
+      exam1: firstMeme,
+      exam2: secondMeme,
+      exam3: thirdMeme,
+    };
+    console.log(meme);
+    dispatch(createMeme(meme));
   }
 
   // function onContentsChangeHandler(event) {
@@ -23,6 +53,7 @@ function InputForm({ isCreate }) {
     <StCardPaper sx={{ p: 2 }}>
       <StH1>{isCreate ? '게시글 작성' : '게시글 수정'}</StH1>
       <TextField
+        required
         id="outlined-basic"
         label="제목"
         variant="outlined"
@@ -31,10 +62,20 @@ function InputForm({ isCreate }) {
         onChange={(event) => onTitleChangeHandler(event)}
         sx={{ width: '100%', mb: 2, mt: 2 }}
       />
-      <StImg src="img/testimg.jpg" alt="testimg" />
-      <Button sx={{ float: 'right' }} variant="outlined">
-        이미지 등록
-      </Button>
+      <StImgDiv>
+        {img && <StImg src={img} alt="upload" />}
+        <input
+          style={{ display: 'none' }}
+          ref={inputRef}
+          name="imgUpload"
+          type="file"
+          accept="image/*"
+          onChange={uploadImg}
+        />
+        <Button variant="outlined" onClick={() => onUploadImgHandler()} sx={{ margin: '0 auto' }}>
+          이미지 등록
+        </Button>
+      </StImgDiv>
       <StRadioNav>
         <ExampleMeme
           number={1}
@@ -75,27 +116,24 @@ function InputForm({ isCreate }) {
       <Button sx={{ float: 'right', ml: '15px' }} variant="outlined" color="error">
         취소
       </Button>
-      <Button
-        onClick={(event) => {
-          event.preventDefault();
-          console.log(event.target);
-        }}
-        sx={{ float: 'right' }}
-        variant="outlined"
-      >
+      <Button onClick={() => onSubmitHandler()} sx={{ float: 'right' }} variant="outlined">
         작성
       </Button>
     </StCardPaper>
   );
 }
 
+const StImgDiv = styled.div`
+  width: 100%;
+`;
+
 const StH1 = styled.h1`
   font-size: 36px;
 `;
 
-const StContents = styled(TextField)`
-  height: 100%;
-`;
+// const StContents = styled(TextField)`
+//   height: 100%;
+// `;
 
 const StRadioNav = styled.div`
   margin-top: 40px;
@@ -116,7 +154,7 @@ const StCardPaper = styled(Paper)`
 `;
 
 const StImg = styled.img`
-  width: 100%;
+  max-width: 100%;
   margin-bottom: 20px;
 `;
 

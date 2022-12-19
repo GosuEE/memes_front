@@ -9,8 +9,6 @@ function ExampleMeme({ number, selectValue, setSelectValue, exampleMeme, setExam
 
   function onRadioChange(event) {
     setSelectValue(event.target.value * 1);
-    console.log(selectValue);
-    console.log(event.target.value);
   }
 
   return (
@@ -25,6 +23,7 @@ function ExampleMeme({ number, selectValue, setSelectValue, exampleMeme, setExam
       />
       <StLabel htmlFor={number}>{number}</StLabel>
       <TextField
+        required
         id="outlined-basic"
         label={`${number}번`}
         variant="outlined"
