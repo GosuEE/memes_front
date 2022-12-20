@@ -10,17 +10,17 @@ import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-import SendIcon from '@mui/icons-material/Send';
-import Stack from '@mui/material/Stack';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import CommentView from '../components/Detail/CommentView';
 import WirteComment from '../components/Detail/WriteComment';
 import { deleteMemes, getMemeById } from '../redux/modules/postSlice';
+import { useState } from 'react';
+import CommentView from '../components/Detail/CommentView';
 
 function Detail() {
   const { memeId } = useParams();
   const meme = useSelector((state) => state.meme.meme);
+
   const dispatch = useDispatch();
   console.log(meme);
 

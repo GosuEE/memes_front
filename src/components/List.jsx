@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import styled from 'styled-components';
+import { useParams, Link } from 'react-router-dom';
 
 const StBoxInner = styled.div`
   text-align: center;
@@ -30,21 +31,23 @@ function List({ memes }) {
       <StBox>
         {memes &&
           memes.map((meme) => (
-            <StBoxInner key={meme.id}>
-              <Card sx={{ width: 330 }}>
-                <CardActionArea>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {meme.title}
-                  </Typography>
-                  <CardMedia component="img" height="260" image={meme.img} alt="img" />
-                  {/* <CardContent>
+            <Link to={`/detail/${meme.id}`}>
+              <StBoxInner key={meme.id}>
+                <Card sx={{ width: 330 }}>
+                  <CardActionArea>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {meme.title}
+                    </Typography>
+                    <CardMedia component="img" height="260" image={meme.img} alt="img" />
+                    {/* <CardContent>
                     <Typography variant="body2" minWidth="330px" color="text.secondary">
                       {meme.contents}
                     </Typography>
                   </CardContent> */}
-                </CardActionArea>
-              </Card>
-            </StBoxInner>
+                  </CardActionArea>
+                </Card>
+              </StBoxInner>
+            </Link>
           ))}
         <StBoxInner>
           <Card sx={{ maxWidth: 330 }}>
