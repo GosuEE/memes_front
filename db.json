@@ -72,6 +72,16 @@
       "exam2": "22",
       "exam3": "33",
       "id": 8
+    },
+    {
+      "title": "2121",
+      "img": "blob:http://localhost:3000/5aa7dc13-c27e-48e6-b5b3-7f64bd0a122d",
+      "contents": "555",
+      "answerValue": 1,
+      "exam1": "2121",
+      "exam2": "2121",
+      "exam3": "21",
+      "id": 9
     }
   ],
   "comments": [
@@ -95,29 +105,39 @@
       "content": "ㅋㅋㅋㅋㅋㅋ"
     },
     {
-      "id": "OUD3CtcvHMvnFfnd9YHYd",
-      "memeId": "2",
-      "content": "dsdsdsd"
-    },
-    {
       "id": "-tSdZpnUnOyHvW6kHOcgV",
       "memeId": "2",
-      "content": "dsdsds"
+      "content": "이거좀 치네 ㅋㅋ"
     },
     {
       "id": "S8SdLp48hS6fu7WZaQ5lv",
       "memeId": "2",
-      "content": "작성"
+      "content": "수정완료하면 이창이없어져야지"
     },
     {
       "id": "2hodVNMB0AdVLpEEhMiwP",
       "memeId": "2",
-      "content": "수정하기"
+      "content": "스무스한데"
     },
     {
       "id": "Kg09kS4lYTXIZvR1fUSje",
       "memeId": "3",
       "content": "수정테스트"
+    },
+    {
+      "id": "RUB5Bp8VzCXd1pIxtem-8",
+      "memeId": "9",
+      "content": "ㅋㅋㅋㅋㅋㅋㅋㅋ나이거좀 살려줘"
+    },
+    {
+      "id": "u6-JmJPIjiWq9tqnCA7e9",
+      "memeId": "9",
+      "content": "ㅋㅋㅋ"
+    },
+    {
+      "id": "pQx5xLaA3wdpcUK47z_9X",
+      "memeId": "9",
+      "content": "ddddddd"
     }
   ]
 }

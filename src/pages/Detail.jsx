@@ -16,7 +16,6 @@ import WirteComment from '../components/Detail/WriteComment';
 import { deleteMemes, getMemeById } from '../redux/modules/postSlice';
 import { useState } from 'react';
 import CommentView from '../components/Detail/CommentView';
-import Header from '../components/Header';
 
 function Detail() {
   const { memeId } = useParams();
@@ -34,7 +33,6 @@ function Detail() {
   }, [getMeme]);
   return (
     <>
-      <Header />
       <StBoxOuter>
         <StBox>
           <h1>{meme.title}</h1>
@@ -80,7 +78,7 @@ function Detail() {
               variant="outlined"
               multiline
               rows={4}
-              defaultValue={meme.contents}
+              value={meme.contents}
               InputProps={{
                 readOnly: true,
               }}
