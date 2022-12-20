@@ -14,10 +14,10 @@ function Router() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/detail/:memeId" element={<Detail />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
         <Route path="/create" element={<Create />} />
         <Route path="/update/:memeId" element={<Update />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );

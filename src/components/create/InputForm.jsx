@@ -13,7 +13,7 @@ function InputForm({ isCreate }) {
   const [firstMeme, setFirstMeme] = useState('');
   const [secondMeme, setSecondMeme] = useState('');
   const [thirdMeme, setThirdMeme] = useState('');
-  // const [contents, setContents] = useState('');
+  const [contents, setContents] = useState('');
   const nowMeme = useSelector((state) => state.meme.meme);
   console.log(nowMeme);
 
@@ -40,6 +40,7 @@ function InputForm({ isCreate }) {
     const meme = {
       title,
       img,
+      contents: contents,
       answerValue: selectValue,
       exam1: firstMeme,
       exam2: secondMeme,
@@ -53,6 +54,7 @@ function InputForm({ isCreate }) {
     const meme = {
       title,
       img,
+      contents: contents,
       answerValue: selectValue,
       exam1: firstMeme,
       exam2: secondMeme,
@@ -82,9 +84,9 @@ function InputForm({ isCreate }) {
     }
   }, [isCreate, nowMeme]);
 
-  // function onContentsChangeHandler(event) {
-  //   setContents(event.target.value);
-  // }
+  function onContentsChangeHandler(event) {
+    setContents(event.target.value);
+  }
 
   return (
     <StCardPaper sx={{ p: 2 }}>
@@ -136,20 +138,20 @@ function InputForm({ isCreate }) {
           setExampleMeme={setThirdMeme}
         />
       </StRadioNav>
-      {/* <StContents
-      id="outlined-basic"
-      label="내용"
-      variant="outlined"
-      value={contents}
-      onChange={(event) => onContentsChangeHandler(event)}
-      multiline
-      inputProps={{
-        style: {
-          height: '300px',
-        },
-      }}
-      sx={{ width: '100%', mb: '15px' }}
-    /> */}
+      <StContents
+        id="outlined-basic"
+        label="내용"
+        variant="outlined"
+        value={contents}
+        onChange={(event) => onContentsChangeHandler(event)}
+        multiline
+        inputProps={{
+          style: {
+            height: '300px',
+          },
+        }}
+        sx={{ width: '100%', mb: '15px' }}
+      />
       <Button sx={{ float: 'right', ml: '15px' }} variant="outlined" color="error">
         취소
       </Button>
@@ -172,9 +174,9 @@ const StH1 = styled.h1`
   font-size: 36px;
 `;
 
-// const StContents = styled(TextField)`
-//   height: 100%;
-// `;
+const StContents = styled(TextField)`
+  height: 100%;
+`;
 
 const StRadioNav = styled.div`
   margin-top: 40px;
