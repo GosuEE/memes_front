@@ -11,7 +11,6 @@ import Update from '../pages/Update';
 function Router() {
   return (
     <BrowserRouter>
-      {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/detail/:memeId" element={<Detail />} />

@@ -1,4 +1,34 @@
 {
-  "memes": [],
-  "comments": []
+  "memes": [
+    {
+      "title": "dss",
+      "img": "blob:http://localhost:3000/2cecc3fc-2823-4b86-a9f0-b3a1ae62e207",
+      "answerValue": 1,
+      "exam1": "sdsds",
+      "exam2": "sds",
+      "exam3": "dsds",
+      "id": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": "QuLoV8Uyago0LeR6SEjcF",
+      "content": ""
+    },
+    {
+      "id": "KcIhgPlsZamZ4dMPvtS6L",
+      "memeId": "1",
+      "content": "2323"
+    },
+    {
+      "id": "moafX7lrUPocKeNZDUnln",
+      "memeId": "1",
+      "content": ""
+    },
+    {
+      "id": "dYzzI3LCOQmbHEvoV1XNg",
+      "memeId": "1",
+      "content": "ㅋㅋㅋㅋㅋㅋ"
+    }
+  ]
 }
