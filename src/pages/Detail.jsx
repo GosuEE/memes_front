@@ -80,7 +80,7 @@ function Detail() {
               variant="outlined"
               multiline
               rows={4}
-              defaultValue="밈을 보고 답을 맞춰주세요 !!! "
+              defaultValue={meme.contents}
               InputProps={{
                 readOnly: true,
               }}
