@@ -17,12 +17,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
+import { display } from '@mui/system';
 
 function CommentView() {
   const param = useParams();
   const [modifyContent, setModifyContent] = useState('');
   const comments = useSelector((state) => state.comment.comments);
-  const [view, setView] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -31,7 +31,8 @@ function CommentView() {
     await dispatch(updateComment({ id: commentId, content: modifyContent }));
     dispatch(readComments(param.memeId));
     setModifyContent('');
-    setView(!view);
+    const showBox = document.getElementById(commentId);
+    showBox.style.display = 'none';
   }
 
   async function deleteCommentHandler(commentId) {
@@ -48,6 +49,13 @@ function CommentView() {
   useEffect(() => {
     dispatchReadComments();
   }, [dispatchReadComments]);
+
+  function selectHandler(commentId) {
+    const showBox = document.getElementById(commentId);
+    showBox.style.display == 'none'
+      ? (showBox.style.display = 'block')
+      : (showBox.style.display = 'none');
+  }
 
   return (
     <div>
@@ -75,7 +83,7 @@ function CommentView() {
                   type="button"
                   id="show"
                   onClick={() => {
-                    setView(!view);
+                    selectHandler(comment.id);
                   }}
                 >
                   <AutoFixNormalIcon />
@@ -83,44 +91,40 @@ function CommentView() {
                 <ListItemText primary={`${comment.content}`} />
               </ListItem>
 
-              {view ? (
-                <div>
-                  <Box
-                    component="form"
-                    sx={{
-                      '& .MuiTextField-root': { m: 1, width: '55ch' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <BoxInner>
-                      <TextField
-                        multiline
-                        id="outlined-basic"
-                        label="댓글수정"
+              <div id={comment.id} style={divStyle}>
+                <Box
+                  component="form"
+                  sx={{
+                    '& .MuiTextField-root': { m: 1, width: '55ch' },
+                  }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <BoxInner>
+                    <TextField
+                      multiline
+                      id="outlined-basic"
+                      label="댓글수정"
+                      variant="outlined"
+                      type="text"
+                      onChange={(e) => {
+                        setModifyContent(e.target.value);
+                      }}
+                    />
+                    <ButtonOuter>
+                      <Button
                         variant="outlined"
-                        type="text"
-                        onChange={(e) => {
-                          setModifyContent(e.target.value);
+                        type="button"
+                        onClick={() => {
+                          updateCommentHandler(comment.id);
                         }}
-                      />
-                      <ButtonOuter>
-                        <Button
-                          variant="outlined"
-                          type="button"
-                          onClick={() => {
-                            updateCommentHandler(comment.id);
-                          }}
-                        >
-                          수정
-                        </Button>
-                      </ButtonOuter>
-                    </BoxInner>
-                  </Box>
-                </div>
-              ) : (
-                <></>
-              )}
+                      >
+                        수정
+                      </Button>
+                    </ButtonOuter>
+                  </BoxInner>
+                </Box>
+              </div>
             </>
           );
         })}
@@ -140,3 +144,7 @@ const BoxInner = styled.div`
   display: flex;
   align-items: flex-end;
 `;
+
+const divStyle = {
+  display: 'none',
+};
