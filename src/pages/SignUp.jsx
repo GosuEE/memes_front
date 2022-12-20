@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,19 +10,47 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 const theme = createTheme();
 
 function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('userName'),
-      nickName: data.get('nickName'),
-      password: data.get('password'),
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const [inputValue, setInputValue] = useState({
+    email: '',
+    nickName: '',
+    password: '',
+  });
+
+  const inputChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValue({
+      ...inputValue,
+      [name]: value,
     });
   };
+
+  const doSignUp = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post('http://localhost:3001/register', inputValue);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     username: data.get('userName'),
+  //     nickName: data.get('nickName'),
+  //     password: data.get('password'),
+  //   });
+  // };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -41,16 +69,18 @@ function SignUp() {
           <Typography component="h1" variant="h5">
             회원가입
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={(event) => doSignUp(event)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="userName"
+                  name="email"
                   required
                   fullWidth
-                  id="userName"
+                  id="email"
                   label="User Name"
+                  value={inputValue.email}
+                  onChange={inputChangeHandler}
                   autoFocus
                 />
               </Grid>
@@ -61,6 +91,8 @@ function SignUp() {
                   id="nickName"
                   label="Nick Name"
                   name="nickName"
+                  value={inputValue.nickName}
+                  onChange={inputChangeHandler}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -73,6 +105,8 @@ function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
+                  value={inputValue.password}
+                  onChange={inputChangeHandler}
                   autoComplete="new-password"
                 />
               </Grid>

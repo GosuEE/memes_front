@@ -39,6 +39,7 @@ export const updateMemes = createAsyncThunk('meme/UPDATE_MEMES', async (payload,
     const response = await axios.patch(`http://localhost:3001/memes/${payload.id}`, {
       title: payload.title,
       img: payload.img,
+      comments: payload.comments,
       answerValue: payload.answerValue,
       exam1: payload.exam1,
       exam2: payload.exam2,

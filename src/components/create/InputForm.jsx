@@ -81,6 +81,7 @@ function InputForm({ isCreate }) {
       setFirstMeme(() => nowMeme.exam1);
       setSecondMeme(() => nowMeme.exam2);
       setThirdMeme(() => nowMeme.exam3);
+      setContents(() => nowMeme.contents);
     }
   }, [isCreate, nowMeme]);
 
