@@ -1,123 +1,15 @@
 {
   "memes": [
     {
-      "title": "dss",
-      "img": "blob:http://localhost:3000/2cecc3fc-2823-4b86-a9f0-b3a1ae62e207",
+      "title": "제목입니다",
+      "img": "blob:http://localhost:3000/1d35550c-76ee-4aaa-8fe4-1fe44270b56e",
+      "contents": "내용입니다",
       "answerValue": 1,
-      "exam1": "sdsds",
-      "exam2": "sds",
-      "exam3": "dsds",
-      "id": 1
-    },
-    {
-      "title": "제목임",
-      "img": "blob:http://localhost:3000/03879a1c-b381-4ee9-a610-84b5812ba365",
-      "answerValue": 1,
-      "exam1": "정답1",
+      "exam1": "1",
       "exam2": "2",
       "exam3": "3",
-      "id": 2
-    },
-    {
-      "title": "제목테스트",
-      "img": "blob:http://localhost:3000/46642de6-ea4a-4577-9b2d-7c5a01276020",
-      "answerValue": 1,
-      "exam1": "정답",
-      "exam2": "ㅌ",
-      "exam3": "ㅌ",
-      "id": 3
-    },
-    {
-      "title": "제목제목",
-      "img": "blob:http://localhost:3000/8339ba32-1f56-4a56-a701-773c54b59cec",
-      "answerValue": 2,
-      "exam1": "1",
-      "exam2": "22",
-      "exam3": "3",
-      "id": 4
-    },
-    {
-      "title": "dsds",
-      "img": "blob:http://localhost:3000/9f8556ae-de69-4647-b4a8-8e1b61d33ac1",
-      "answerValue": 1,
-      "exam1": "",
-      "exam2": "",
-      "exam3": "",
-      "id": 5
-    },
-    {
-      "title": "1221",
-      "img": "blob:http://localhost:3000/825d8bda-7f4c-4d61-8942-96869cade0a9",
-      "answerValue": 1,
-      "exam1": "11",
-      "exam2": "22",
-      "exam3": "33",
-      "id": 6
-    },
-    {
-      "title": "22222",
-      "img": "",
-      "answerValue": 2,
-      "exam1": "222",
-      "exam2": "22",
-      "exam3": "222",
-      "id": 7
-    },
-    {
-      "title": "dsds",
-      "img": "blob:http://localhost:3000/97c74024-00e3-433a-998f-b5f2b50af3e1",
-      "contents": "444",
-      "answerValue": 1,
-      "exam1": "11",
-      "exam2": "22",
-      "exam3": "33",
-      "id": 8
+      "id": 1
     }
   ],
-  "comments": [
-    {
-      "id": "QuLoV8Uyago0LeR6SEjcF",
-      "content": ""
-    },
-    {
-      "id": "KcIhgPlsZamZ4dMPvtS6L",
-      "memeId": "1",
-      "content": "2323"
-    },
-    {
-      "id": "moafX7lrUPocKeNZDUnln",
-      "memeId": "1",
-      "content": ""
-    },
-    {
-      "id": "dYzzI3LCOQmbHEvoV1XNg",
-      "memeId": "1",
-      "content": "ㅋㅋㅋㅋㅋㅋ"
-    },
-    {
-      "id": "OUD3CtcvHMvnFfnd9YHYd",
-      "memeId": "2",
-      "content": "dsdsdsd"
-    },
-    {
-      "id": "-tSdZpnUnOyHvW6kHOcgV",
-      "memeId": "2",
-      "content": "dsdsds"
-    },
-    {
-      "id": "S8SdLp48hS6fu7WZaQ5lv",
-      "memeId": "2",
-      "content": "작성"
-    },
-    {
-      "id": "2hodVNMB0AdVLpEEhMiwP",
-      "memeId": "2",
-      "content": "수정하기"
-    },
-    {
-      "id": "Kg09kS4lYTXIZvR1fUSje",
-      "memeId": "3",
-      "content": "수정테스트"
-    }
-  ]
+  "comments": []
 }
