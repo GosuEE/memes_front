@@ -16,6 +16,7 @@ import WirteComment from '../components/Detail/WriteComment';
 import { deleteMemes, getMemeById } from '../redux/modules/postSlice';
 import { useState } from 'react';
 import CommentView from '../components/Detail/CommentView';
+import Header from '../components/Header';
 
 function Detail() {
   const { memeId } = useParams();
@@ -32,79 +33,82 @@ function Detail() {
     getMeme();
   }, [getMeme]);
   return (
-    <StBoxOuter>
-      <StBox>
-        <h1>{meme.title}</h1>
-        <Link to="/">
-          <Button
-            onClick={() => dispatch(deleteMemes(memeId))}
-            sx={{ mt: 2, ml: '15px' }}
-            color="error"
-            variant="outlined"
-          >
-            삭제
-          </Button>
-        </Link>
-        <Link to={`/update/${memeId}`}>
-          <Button sx={{ mt: 2, ml: '15px' }} variant="outlined">
-            수정
-          </Button>
-        </Link>
-        <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            mt: 2,
-            '& > :not(style)': {
-              m: 1,
-              width: 550,
-              height: 400,
-            },
-          }}
-        >
-          <Paper elevation={3}>{meme.img && <img src={meme.img} alt="img" />}</Paper>
-        </Box>
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '62ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            label="내용"
-            variant="outlined"
-            multiline
-            rows={4}
-            defaultValue="밈을 보고 답을 맞춰주세요 !!! "
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-        </Box>
-        <RadioGroupOuter>
-          <FormControl>
-            <FormLabel id="demo-radio-buttons-group-label">정답을 선택해 주세요</FormLabel>
-
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group"
+    <>
+      <Header />
+      <StBoxOuter>
+        <StBox>
+          <h1>{meme.title}</h1>
+          <Link to="/">
+            <Button
+              onClick={() => dispatch(deleteMemes(memeId))}
+              sx={{ mt: 2, ml: '15px' }}
+              color="error"
+              variant="outlined"
             >
-              <FormControlLabel value="female" control={<Radio />} label={meme.exam1} />
-              <FormControlLabel value="male" control={<Radio />} label={meme.exam2} />
-              <FormControlLabel value="other" control={<Radio />} label={meme.exam3} />
-            </RadioGroup>
-            <Button variant="outlined" size="small">
-              정답제출
+              삭제
             </Button>
-          </FormControl>
-        </RadioGroupOuter>
-        <WirteComment />
-        <CommentView />
-      </StBox>
-    </StBoxOuter>
+          </Link>
+          <Link to={`/update/${memeId}`}>
+            <Button sx={{ mt: 2, ml: '15px' }} variant="outlined">
+              수정
+            </Button>
+          </Link>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              mt: 2,
+              '& > :not(style)': {
+                m: 1,
+                width: 550,
+                height: 400,
+              },
+            }}
+          >
+            <Paper elevation={3}>{meme.img && <img src={meme.img} alt="img" />}</Paper>
+          </Box>
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '62ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              label="내용"
+              variant="outlined"
+              multiline
+              rows={4}
+              defaultValue="밈을 보고 답을 맞춰주세요 !!! "
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </Box>
+          <RadioGroupOuter>
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">정답을 선택해 주세요</FormLabel>
+
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="female"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel value="female" control={<Radio />} label={meme.exam1} />
+                <FormControlLabel value="male" control={<Radio />} label={meme.exam2} />
+                <FormControlLabel value="other" control={<Radio />} label={meme.exam3} />
+              </RadioGroup>
+              <Button variant="outlined" size="small">
+                정답제출
+              </Button>
+            </FormControl>
+          </RadioGroupOuter>
+          <WirteComment />
+          <CommentView />
+        </StBox>
+      </StBoxOuter>
+    </>
   );
 }
 

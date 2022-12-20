@@ -7,11 +7,22 @@ import { readComments } from '../../redux/modules/commentSlice';
 import { useCallback } from 'react';
 import { deleteComment } from '../../redux/modules/commentSlice';
 import { updateComment } from '../../redux/modules/commentSlice';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import styled from 'styled-components';
+import Button from '@mui/material/Button';
 
 function CommentView() {
   const param = useParams();
   const [modifyContent, setModifyContent] = useState('');
   const comments = useSelector((state) => state.comment.comments);
+  const [view, setView] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -20,6 +31,7 @@ function CommentView() {
     await dispatch(updateComment({ id: commentId, content: modifyContent }));
     dispatch(readComments(param.memeId));
     setModifyContent('');
+    setView(!view);
   }
 
   async function deleteCommentHandler(commentId) {
@@ -39,38 +51,92 @@ function CommentView() {
 
   return (
     <div>
-      {comments?.map((comment) => {
-        return (
-          <li key={comment.id}>
-            {comment.content}
-            <input
-              type="text"
-              onChange={(e) => {
-                setModifyContent(e.target.value);
-              }}
-            ></input>
-            <button
-              type="button"
-              onClick={() => {
-                updateCommentHandler(comment.id);
-              }}
-            >
-              수정
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                deleteCommentHandler(comment.id);
-              }}
-            >
-              {' '}
-              삭제
-            </button>
-          </li>
-        );
-      })}
+      <List sx={{ width: '100%', maxWidth: 550, bgcolor: 'background.paper' }}>
+        {comments?.map((comment) => {
+          return (
+            <>
+              <ListItem
+                key={comment.id}
+                disableGutters
+                secondaryAction={
+                  <IconButton
+                    aria-label="comment"
+                    type="button"
+                    onClick={() => {
+                      deleteCommentHandler(comment.id);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              >
+                <IconButton
+                  aria-label="comment"
+                  type="button"
+                  id="show"
+                  onClick={() => {
+                    setView(!view);
+                  }}
+                >
+                  <AutoFixNormalIcon />
+                </IconButton>
+                <ListItemText primary={`${comment.content}`} />
+              </ListItem>
+
+              {view ? (
+                <div>
+                  <Box
+                    component="form"
+                    sx={{
+                      '& .MuiTextField-root': { m: 1, width: '55ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    <BoxInner>
+                      <TextField
+                        multiline
+                        id="outlined-basic"
+                        label="댓글수정"
+                        variant="outlined"
+                        type="text"
+                        onChange={(e) => {
+                          setModifyContent(e.target.value);
+                        }}
+                      />
+                      <ButtonOuter>
+                        <Button
+                          variant="outlined"
+                          type="button"
+                          onClick={() => {
+                            updateCommentHandler(comment.id);
+                          }}
+                        >
+                          수정
+                        </Button>
+                      </ButtonOuter>
+                    </BoxInner>
+                  </Box>
+                </div>
+              ) : (
+                <></>
+              )}
+            </>
+          );
+        })}
+      </List>
     </div>
   );
 }
 
 export default CommentView;
+const ButtonOuter = styled.div`
+  /* display: inline; */
+  align-self: flex-end;
+  margin-bottom: 8px;
+`;
+
+const BoxInner = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;

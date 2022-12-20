@@ -1,11 +1,12 @@
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import { AppBar, Tabs, Tab } from '@material-ui/core';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import HomeIcon from '@mui/icons-material/Home';
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import IconButton from '@mui/material/IconButton';
 import React from 'react';
+import HomeIcon from '@mui/icons-material/Home';
+import CreateIcon from '@mui/icons-material/Create';
 
 function Header() {
   const [value, setValue] = React.useState(0);
@@ -17,12 +18,18 @@ function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="Main Tabs">
-          <Tab label="Logo" icon={<DriveFileRenameOutlineIcon />} />
-          <Tab label="Home" icon={<HomeIcon />} />
+        <Toolbar>
+          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+            <HomeIcon />
+            HOME
+          </IconButton>
+          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+            <CreateIcon />
+            WRITE
+          </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
           <Button color="inherit">Login</Button>
-        </Tabs>
+        </Toolbar>
       </AppBar>
     </Box>
   );

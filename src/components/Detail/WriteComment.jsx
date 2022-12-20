@@ -23,6 +23,7 @@ function WirteComment() {
     alert('작성완료');
     await dispatch(createComment(comment));
     dispatch(readComments(param.memeId));
+    setCommentContent('');
   };
 
   return (

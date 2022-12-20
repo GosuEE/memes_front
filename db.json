@@ -8,6 +8,15 @@
       "exam2": "sds",
       "exam3": "dsds",
       "id": 1
+    },
+    {
+      "title": "제목임",
+      "img": "blob:http://localhost:3000/03879a1c-b381-4ee9-a610-84b5812ba365",
+      "answerValue": 1,
+      "exam1": "정답1",
+      "exam2": "2",
+      "exam3": "3",
+      "id": 2
     }
   ],
   "comments": [
@@ -29,6 +38,26 @@
       "id": "dYzzI3LCOQmbHEvoV1XNg",
       "memeId": "1",
       "content": "ㅋㅋㅋㅋㅋㅋ"
+    },
+    {
+      "id": "OUD3CtcvHMvnFfnd9YHYd",
+      "memeId": "2",
+      "content": "가능만 수정"
+    },
+    {
+      "id": "-tSdZpnUnOyHvW6kHOcgV",
+      "memeId": "2",
+      "content": "수정되나"
+    },
+    {
+      "id": "S8SdLp48hS6fu7WZaQ5lv",
+      "memeId": "2",
+      "content": "작성"
+    },
+    {
+      "id": "2hodVNMB0AdVLpEEhMiwP",
+      "memeId": "2",
+      "content": "수정하기"
     }
   ]
 }
