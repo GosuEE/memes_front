@@ -22,7 +22,7 @@ function Header() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Link to={`/`}>
+            <Link to={`/`} style={LinkStyle}>
               <IconButton
                 size="large"
                 edge="start"
@@ -35,7 +35,7 @@ function Header() {
               </IconButton>
             </Link>
 
-            <Link to={`/create`}>
+            <Link to={`/create`} style={LinkStyle}>
               <IconButton
                 size="large"
                 edge="start"
@@ -58,6 +58,10 @@ function Header() {
 
 export default Header;
 
+const LinkStyle = {
+  textDecoration: 'none',
+  color: 'white',
+};
 const StBox = styled.div`
   margin-top: 50px;
 `;

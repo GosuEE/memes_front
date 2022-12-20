@@ -89,80 +89,91 @@ function InputForm({ isCreate }) {
   }
 
   return (
-    <StCardPaper sx={{ p: 2 }}>
-      <StH1>{isCreate ? '게시글 작성' : '게시글 수정'}</StH1>
-      <TextField
-        required
-        id="outlined-basic"
-        label="제목"
-        variant="outlined"
-        size="small"
-        value={title}
-        onChange={(event) => onTitleChangeHandler(event)}
-        sx={{ width: '100%', mb: 2, mt: 2 }}
-      />
-      <StImgDiv>
-        {img && <StImg src={img} alt="upload" />}
-        <input
-          style={{ display: 'none' }}
-          ref={inputRef}
-          name="imgUpload"
-          type="file"
-          accept="image/*"
-          onChange={uploadImg}
-        />
-        <Button variant="outlined" onClick={() => onUploadImgHandler()} sx={{ margin: '0 auto' }}>
-          이미지 등록
-        </Button>
-      </StImgDiv>
-      <StRadioNav>
-        <ExampleMeme
-          number={1}
-          selectValue={selectValue}
-          setSelectValue={setSelectValue}
-          exampleMeme={firstMeme}
-          setExampleMeme={setFirstMeme}
-        />
-        <ExampleMeme
-          number={2}
-          selectValue={selectValue}
-          setSelectValue={setSelectValue}
-          exampleMeme={secondMeme}
-          setExampleMeme={setSecondMeme}
-        />
-        <ExampleMeme
-          number={3}
-          selectValue={selectValue}
-          setSelectValue={setSelectValue}
-          exampleMeme={thirdMeme}
-          setExampleMeme={setThirdMeme}
-        />
-      </StRadioNav>
-      <StContents
-        id="outlined-basic"
-        label="내용"
-        variant="outlined"
-        value={contents}
-        onChange={(event) => onContentsChangeHandler(event)}
-        multiline
-        inputProps={{
-          style: {
-            height: '300px',
-          },
-        }}
-        sx={{ width: '100%', mb: '15px' }}
-      />
-      <Button sx={{ float: 'right', ml: '15px' }} variant="outlined" color="error">
-        취소
-      </Button>
-      <Button
-        onClick={isCreate ? onSubmitHandler : onUpdateHandler}
-        sx={{ float: 'right' }}
-        variant="outlined"
-      >
-        {isCreate ? '작성' : '수정'}
-      </Button>
-    </StCardPaper>
+    <div style={divStyle}>
+      <StCardPaper sx={{ p: 3 }}>
+        <StH1>{isCreate ? '게시글 작성' : '게시글 수정'}</StH1>
+        <StBox style={divStyle}>
+          <TextField
+            required
+            id="outlined-basic"
+            label="제목"
+            variant="outlined"
+            size="small"
+            value={title}
+            onChange={(event) => onTitleChangeHandler(event)}
+            sx={{ width: '100%', mb: 2, mt: 2 }}
+          />
+          <StImgDiv>
+            {img && <StImg src={img} alt="upload" />}
+            <input
+              style={{ display: 'none' }}
+              ref={inputRef}
+              name="imgUpload"
+              type="file"
+              accept="image/*"
+              onChange={uploadImg}
+            />
+            <Button
+              variant="outlined"
+              onClick={() => onUploadImgHandler()}
+              sx={{ margin: '0 auto' }}
+            >
+              이미지 등록
+            </Button>
+          </StImgDiv>
+
+          <StContents
+            id="outlined-basic"
+            label="내용"
+            variant="outlined"
+            value={contents}
+            onChange={(event) => onContentsChangeHandler(event)}
+            multiline
+            inputProps={{
+              style: {
+                height: '200px',
+              },
+            }}
+            sx={{ width: '100%', mb: '15px' }}
+          />
+          <StRadioNavOuter>
+            <StRadioNav>
+              <ExampleMeme
+                number={1}
+                selectValue={selectValue}
+                setSelectValue={setSelectValue}
+                exampleMeme={firstMeme}
+                setExampleMeme={setFirstMeme}
+              />
+              <ExampleMeme
+                number={2}
+                selectValue={selectValue}
+                setSelectValue={setSelectValue}
+                exampleMeme={secondMeme}
+                setExampleMeme={setSecondMeme}
+              />
+              <ExampleMeme
+                number={3}
+                selectValue={selectValue}
+                setSelectValue={setSelectValue}
+                exampleMeme={thirdMeme}
+                setExampleMeme={setThirdMeme}
+              />
+            </StRadioNav>
+          </StRadioNavOuter>
+          <Button sx={{ float: 'right', ml: '15px' }} variant="outlined" color="error">
+            취소
+          </Button>
+          <Button
+            onClick={isCreate ? onSubmitHandler : onUpdateHandler}
+            sx={{ float: 'right' }}
+            variant="outlined"
+          >
+            {isCreate ? '작성' : '수정'}
+          </Button>
+        </StBox>
+      </StCardPaper>
+    </div>
   );
 }
 
@@ -199,6 +210,18 @@ const StCardPaper = styled(Paper)`
 const StImg = styled.img`
   max-width: 100%;
   margin-bottom: 20px;
+`;
+
+const StBox = styled.div`
+  max-width: 600px;
+`;
+
+const divStyle = {
+  margin: '0 auto',
+};
+
+const StRadioNavOuter = styled.div`
+  text-align: left;
 `;
 
 export default InputForm;
