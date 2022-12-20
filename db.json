@@ -15,10 +15,9 @@
   "users": [
     {
       "email": "leemin727@naver.com",
-      "password": "$2a$10$u9a0sPK2ETlNcU731aq8Y.CKFsyiIKiTOSxgdW3uqK9mqY5rYqerK",
+      "password": "$2a$10$85a84XFIPJhXU0HQI2/TbuyZpY57nIf1Xea/R4OrBfllBJ8Qvjsva",
       "nickName": "GosuEE",
-      "userName": "3",
       "id": 1
-    },
+    }
   ]
 }

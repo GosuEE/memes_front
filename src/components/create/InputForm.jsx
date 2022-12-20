@@ -15,7 +15,6 @@ function InputForm({ isCreate }) {
   const [thirdMeme, setThirdMeme] = useState('');
   const [contents, setContents] = useState('');
   const nowMeme = useSelector((state) => state.meme.meme);
-  console.log(nowMeme);
 
   const { memeId } = useParams();
   const inputRef = useRef();
