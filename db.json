@@ -11,5 +11,14 @@
       "id": 1
     }
   ],
-  "comments": []
+  "comments": [],
+  "users": [
+    {
+      "email": "leemin727@naver.com",
+      "password": "$2a$10$u9a0sPK2ETlNcU731aq8Y.CKFsyiIKiTOSxgdW3uqK9mqY5rYqerK",
+      "nickName": "GosuEE",
+      "userName": "3",
+      "id": 1
+    }
+  ]
 }
