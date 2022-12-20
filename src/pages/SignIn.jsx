@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,18 +9,38 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { login } from '../redux/modules/loginSlice';
+import { useDispatch } from 'react-redux';
 
 const theme = createTheme();
 
 function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      userName: data.get('userName'),
-      password: data.get('password'),
+  const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const dispatch = useDispatch();
+
+  const [inputValue, setInputValue] = useState({
+    userName: '',
+    password: '',
+  });
+
+  const inputChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValue({
+      ...inputValue,
+      [name]: value,
     });
+  };
+
+  const loginHandler = (event) => {
+    event.preventDefault();
+    const account = {
+      userName: inputValue.userName,
+      password: inputValue.password,
+    };
+    dispatch(login(account));
   };
 
   return (
@@ -42,7 +62,12 @@ function SignIn() {
             <Typography component="h1" variant="h5">
               로그인
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              onSubmit={(event) => loginHandler(event)}
+              noValidate
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -50,7 +75,9 @@ function SignIn() {
                 id="userName"
                 label="User Name"
                 name="userName"
-                autoComplete="userName"
+                value={inputValue.userName}
+                onChange={inputChangeHandler}
+                // autoComplete="userName"
                 autoFocus
               />
               <TextField
@@ -61,7 +88,9 @@ function SignIn() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                value={inputValue.password}
+                onChange={inputChangeHandler}
+                // autoComplete="current-password"
               />
 
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>

@@ -10,15 +10,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
-
+import { useDispatch } from 'react-redux';
+import { signUp } from '../redux/modules/loginSlice';
 const theme = createTheme();
 
 function SignUp() {
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState({
-    email: '',
+    userName: '',
     nickName: '',
     password: '',
   });
@@ -31,25 +30,15 @@ function SignUp() {
     });
   };
 
-  const doSignUp = async (event) => {
+  const signUpHandler = (event) => {
     event.preventDefault();
-    try {
-      const { data } = await axios.post('http://localhost:3001/register', inputValue);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    const account = {
+      userName: inputValue.userName,
+      nickName: inputValue.nickName,
+      password: inputValue.password,
+    };
+    dispatch(signUp(account));
   };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     username: data.get('userName'),
-  //     nickName: data.get('nickName'),
-  //     password: data.get('password'),
-  //   });
-  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -69,17 +58,22 @@ function SignUp() {
           <Typography component="h1" variant="h5">
             회원가입
           </Typography>
-          <Box component="form" noValidate onSubmit={(event) => doSignUp(event)} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={(event) => signUpHandler(event)}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="email"
+                  name="userName"
                   required
                   fullWidth
-                  id="email"
+                  id="userName"
                   label="User Name"
-                  value={inputValue.email}
+                  value={inputValue.userName}
                   onChange={inputChangeHandler}
                   autoFocus
                 />
