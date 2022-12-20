@@ -49,26 +49,6 @@ function List({ memes }) {
               </StBoxInner>
             </Link>
           ))}
-        <StBoxInner>
-          <Card sx={{ maxWidth: 330 }}>
-            <CardActionArea>
-              <Typography gutterBottom variant="h5" component="div">
-                제목
-              </Typography>
-              <CardMedia
-                component="img"
-                height="260"
-                image="/static/images/cards/contemplative-reptile.jpg"
-                alt="이미지가없음"
-              />
-              <CardContent>
-                <Typography variant="body2" minWidth="330px" color="text.secondary">
-                  내용
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </StBoxInner>
       </StBox>
     </StBoxOuter>
   );
