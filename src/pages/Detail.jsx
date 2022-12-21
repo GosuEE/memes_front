@@ -34,6 +34,7 @@ function Detail() {
     <>
       <StBoxOuter>
         <StBox>
+          <h1>작성자: {meme.nickname}</h1>
           <h1>{meme.title}</h1>
           <Link to="/">
             <Button
@@ -62,7 +63,9 @@ function Detail() {
               },
             }}
           >
-            <Paper elevation={3}>{meme.img && <img src={meme.img} alt="img" />}</Paper>
+            <Paper elevation={3}>
+              {meme.img && <img src={meme.img} alt="img" style={inputStyle} />}
+            </Paper>
           </Box>
           <Box
             component="form"
@@ -137,3 +140,8 @@ const TextBox = styled.textarea`
 const RadioGroupOuter = styled.div`
   text-align: left;
 `;
+
+const inputStyle = {
+  maxWidth: '100%',
+  maxHeight: `100%`,
+};

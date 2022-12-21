@@ -88,7 +88,7 @@ function CommentView() {
                 >
                   <AutoFixNormalIcon />
                 </IconButton>
-                <ListItemText primary={`${comment.comment}`} />
+                <ListItemText primary={`${comment.nickname}` + ' :' + `${comment.comment}`} />
               </ListItem>
 
               <div id={comment.id} style={divStyle}>
