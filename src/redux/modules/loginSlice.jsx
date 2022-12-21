@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { Cookies } from 'react-cookie';
-import { baseURL, instance } from '../../core/api/axios';
+import { instance } from '../../core/api/axios';
 
 const initialState = {
   isLoading: false,
@@ -20,7 +19,6 @@ export const signUp = createAsyncThunk('login/SIGNUP', async (payload, thunkAPI)
 export const login = createAsyncThunk('login/LOGIN', async (payload, thunkAPI) => {
   try {
     const response = await instance.post('/api/login', payload);
-    console.log(response.headers.authorization);
     return thunkAPI.fulfillWithValue(response.headers.authorization);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -77,7 +75,6 @@ const loginSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       const cookies = new Cookies();
       cookies.set('accessToken', action.payload, { path: '/' });
-      console.log(cookies);
       state.isLoading = false;
     },
     [login.rejected]: (state, action) => {
