@@ -55,15 +55,14 @@ function InputForm({ isCreate }) {
   function onUpdateHandler() {
     const meme = {
       title,
-      img,
+      id: memeId,
       contents: contents,
       answerValue: selectValue,
       exam1: firstMeme,
       exam2: secondMeme,
       exam3: thirdMeme,
-      id: nowMeme.id,
     };
-    dispatch(updateMemes(meme));
+    dispatch(updateMemes({ meme: meme, img: img }));
     navigate(`/detail/${memeId}`);
   }
 

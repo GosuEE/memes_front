@@ -6,7 +6,6 @@ import { Cookies } from 'react-cookie';
 const initialState = {
   memes: [],
   meme: {
-    id: 0,
     title: '',
     img: '',
     contents: '',
@@ -49,14 +48,17 @@ export const readMemes = createAsyncThunk('meme/READ_MEMES', async (payload, thu
 
 export const updateMemes = createAsyncThunk('meme/UPDATE_MEMES', async (payload, thunkAPI) => {
   try {
-    const response = await baseURL.patch(`/memes/${payload.id}`, {
-      title: payload.title,
-      img: payload.img,
-      contents: payload.contents,
-      answerValue: payload.answerValue,
-      exam1: payload.exam1,
-      exam2: payload.exam2,
-      exam3: payload.exam3,
+    const formData = new FormData();
+    const json = JSON.stringify(payload.meme);
+    const blob = new Blob([json], { type: 'application/json' });
+    formData.append('requestDto', blob);
+    formData.append('data', payload.img);
+    console.log(payload);
+
+    const response = await baseURL.patch(`/api/meme/${payload.meme.id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
@@ -66,7 +68,7 @@ export const updateMemes = createAsyncThunk('meme/UPDATE_MEMES', async (payload,
 
 export const deleteMemes = createAsyncThunk('meme/DELETE_MEMES', async (payload, thunkAPI) => {
   try {
-    const response = await baseURL.delete(`/memes/${payload}`);
+    const response = await baseURL.delete(`api/meme/${payload}`);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
