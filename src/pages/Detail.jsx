@@ -19,7 +19,7 @@ import CommentView from '../components/Detail/CommentView';
 
 function Detail() {
   const { memeId } = useParams();
-  const meme = useSelector((state) => state.meme);
+  const meme = useSelector((state) => state.meme.meme);
 
   const dispatch = useDispatch();
 

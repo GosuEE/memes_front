@@ -16,7 +16,10 @@ export const createComment = createAsyncThunk(
   'Comment/CREATE_COMMENT',
   async (payload, thunkAPI) => {
     try {
-      const response = await baseURL.post('/api/memecomment', payload);
+      const response = await baseURL.post(
+        `/api/meme/${payload.memeId}`,
+        JSON.stringify({ comment: payload.content }),
+      );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -27,7 +30,6 @@ export const createComment = createAsyncThunk(
 export const deleteComment = createAsyncThunk('meme/DELETE_COMMENTS', async (payload, thunkAPI) => {
   try {
     const response = await baseURL.delete(`/api/memecomment/${payload}`);
-    console.log(response.data);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -46,9 +48,8 @@ export const readComments = createAsyncThunk('meme/READ_COMMENTS', async (payloa
 
 export const updateComment = createAsyncThunk('meme/UPDATE_COMMENT', async (payload, thunkAPI) => {
   try {
-    const response = await instance.patch(`/api/memecomment/${payload.id}`, {
-      content: payload.content,
-    });
+    const data = JSON.stringify({ comment: payload.content });
+    const response = await instance.patch(`/api/memecomment/${payload.id}`, data);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
