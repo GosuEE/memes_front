@@ -18,11 +18,12 @@ import TextField from '@mui/material/TextField';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import { display } from '@mui/system';
+import { getMemeById } from '../../redux/modules/postSlice';
 
 function CommentView() {
   const param = useParams();
   const [modifyContent, setModifyContent] = useState('');
-  const comments = useSelector((state) => state.comment.comments);
+  const comments = useSelector((state) => state.meme.answerReplyList);
 
   const dispatch = useDispatch();
 
@@ -42,8 +43,7 @@ function CommentView() {
   }
 
   const dispatchReadComments = useCallback(() => {
-    dispatch(readComments(param.memeId));
-    console.log(param.memeId);
+    dispatch(getMemeById(param.memeId));
   }, [dispatch]);
 
   useEffect(() => {

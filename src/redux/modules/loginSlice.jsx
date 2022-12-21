@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
+import { baseURL, instance } from '../../core/api/axios';
 
 const initialState = {
   isLoading: false,
@@ -9,7 +10,7 @@ const initialState = {
 
 export const signUp = createAsyncThunk('login/SIGNUP', async (payload, thunkAPI) => {
   try {
-    const response = await axios.post('http://localhost:3001/api/signup', payload);
+    const response = await instance.post('/api/signup', payload);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -18,8 +19,9 @@ export const signUp = createAsyncThunk('login/SIGNUP', async (payload, thunkAPI)
 
 export const login = createAsyncThunk('login/LOGIN', async (payload, thunkAPI) => {
   try {
-    const response = await axios.post('http://localhost:3001/api/login', payload);
-    return thunkAPI.fulfillWithValue(response.data);
+    const response = await instance.post('/api/login', payload);
+    console.log(response.headers.authorization);
+    return thunkAPI.fulfillWithValue(response.headers.authorization);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
@@ -52,7 +54,7 @@ export const login = createAsyncThunk('login/LOGIN', async (payload, thunkAPI) =
 // );
 
 const loginSlice = createSlice({
-  name: 'post',
+  name: 'login',
   initialState,
   reducers: {},
   extraReducers: {
@@ -60,9 +62,11 @@ const loginSlice = createSlice({
       state.isLoading = true;
     },
     [signUp.fulfilled]: (state, action) => {
+      console.log('test signup');
       state.isLoading = false;
     },
     [signUp.rejected]: (state, action) => {
+      console.log('test signup rejec');
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -71,9 +75,10 @@ const loginSlice = createSlice({
       state.isLoading = true;
     },
     [login.fulfilled]: (state, action) => {
-      const [cookies, setCookie, removeCookie] = useCookies();
+      const cookies = new Cookies();
+      cookies.set('accessToken', action.payload, { path: '/' });
+      console.log(cookies);
       state.isLoading = false;
-      setCookie('accessToken', action.payload, { path: '/' });
     },
     [login.rejected]: (state, action) => {
       state.isLoading = false;
