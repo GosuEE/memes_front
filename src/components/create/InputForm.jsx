@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { TextField, Paper, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { json, useNavigate, useParams } from 'react-router-dom';
 import ExampleMeme from './ExampleMeme';
 import { createMeme, getMemeById, updateMemes } from '../../redux/modules/postSlice';
 
 function InputForm({ isCreate }) {
   const [title, setTitle] = useState('');
   const [img, setImg] = useState('');
+  const [showImg, setShowImg] = useState('');
   const [selectValue, setSelectValue] = useState('');
   const [firstMeme, setFirstMeme] = useState('');
   const [secondMeme, setSecondMeme] = useState('');
@@ -28,7 +29,10 @@ function InputForm({ isCreate }) {
   function uploadImg(event) {
     const formData = new FormData();
     formData.append('file', event.target.files[0]);
-    setImg(URL.createObjectURL(event.target.files[0]));
+
+    setImg(event.target.files[0]);
+
+    setShowImg(URL.createObjectURL(event.target.files[0]));
   }
 
   function onUploadImgHandler() {
@@ -38,14 +42,13 @@ function InputForm({ isCreate }) {
   function onSubmitHandler() {
     const meme = {
       title,
-      img,
       contents: contents,
       answerValue: selectValue,
       exam1: firstMeme,
       exam2: secondMeme,
       exam3: thirdMeme,
     };
-    dispatch(createMeme(meme));
+    dispatch(createMeme({ meme: meme, img: img }));
     navigate('/');
   }
 
@@ -104,7 +107,7 @@ function InputForm({ isCreate }) {
             sx={{ width: '100%', mb: 2, mt: 2 }}
           />
           <StImgDiv>
-            {img && <StImg src={img} alt="upload" />}
+            {showImg && <StImg src={showImg} alt="upload" />}
             <input
               style={{ display: 'none' }}
               ref={inputRef}

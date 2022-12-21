@@ -37,7 +37,7 @@ function SignIn() {
   const loginHandler = (event) => {
     event.preventDefault();
     const account = {
-      userName: inputValue.userName,
+      username: inputValue.userName,
       password: inputValue.password,
     };
     dispatch(login(account));

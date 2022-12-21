@@ -33,8 +33,8 @@ function SignUp() {
   const signUpHandler = (event) => {
     event.preventDefault();
     const account = {
-      userName: inputValue.userName,
-      nickName: inputValue.nickName,
+      username: inputValue.userName,
+      nickname: inputValue.nickName,
       password: inputValue.password,
     };
     dispatch(signUp(account));

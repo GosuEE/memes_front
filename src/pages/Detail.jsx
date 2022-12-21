@@ -19,10 +19,9 @@ import CommentView from '../components/Detail/CommentView';
 
 function Detail() {
   const { memeId } = useParams();
-  const meme = useSelector((state) => state.meme.meme);
+  const meme = useSelector((state) => state.meme);
 
   const dispatch = useDispatch();
-  console.log(meme);
 
   const getMeme = useCallback(() => {
     dispatch(getMemeById(memeId));
