@@ -6,7 +6,6 @@ import { Cookies } from 'react-cookie';
 const initialState = {
   memes: [],
   meme: {
-    id: 0,
     title: '',
     img: '',
     contents: '',

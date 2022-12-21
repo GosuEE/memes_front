@@ -81,6 +81,7 @@ const loginSlice = createSlice({
       state.isLoading = false;
     },
     [login.rejected]: (state, action) => {
+      console.log('login_rejec');
       state.isLoading = false;
       state.error = action.payload;
     },

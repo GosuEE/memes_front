@@ -9,6 +9,46 @@
       "exam2": "X",
       "exam3": "X",
       "id": 1
+    },
+    {
+      "title": "제목입니다",
+      "img": "",
+      "contents": "내용데스",
+      "answerValue": 1,
+      "exam1": "1",
+      "exam2": "2",
+      "exam3": "3",
+      "id": 2
+    },
+    {
+      "title": "344",
+      "img": "",
+      "contents": "1",
+      "answerValue": 3,
+      "exam1": "2",
+      "exam2": "1",
+      "exam3": "0",
+      "id": 3
+    },
+    {
+      "title": "123",
+      "img": "",
+      "contents": "132",
+      "answerValue": 3,
+      "exam1": "123",
+      "exam2": "123",
+      "exam3": "132",
+      "id": 4
+    },
+    {
+      "title": "1235",
+      "img": "",
+      "contents": "1625",
+      "answerValue": 3,
+      "exam1": "1352",
+      "exam2": "13245",
+      "exam3": "12351235",
+      "id": 5
     }
   ],
   "comments": [
