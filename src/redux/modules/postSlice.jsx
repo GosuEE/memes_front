@@ -53,7 +53,6 @@ export const updateMemes = createAsyncThunk('meme/UPDATE_MEMES', async (payload,
     const blob = new Blob([json], { type: 'application/json' });
     formData.append('requestDto', blob);
     formData.append('data', payload.img);
-    console.log(payload);
 
     const response = await baseURL.patch(`/api/meme/${payload.meme.id}`, formData, {
       headers: {

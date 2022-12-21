@@ -89,7 +89,6 @@ function Detail() {
 
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="female"
                 name="radio-buttons-group"
               >
                 <FormControlLabel value="female" control={<Radio />} label={meme.exam1} />
