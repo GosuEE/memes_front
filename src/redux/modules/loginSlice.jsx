@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { Cookies } from 'react-cookie';
-import { baseURL, instance } from '../../core/api/axios';
+import { instance } from '../../core/api/axios';
 
 const initialState = {
+  duplicate: {
+    idDuplicate: true,
+    nickDuplicate: true,
+  },
   isLoading: false,
   error: null,
 };
@@ -19,54 +21,58 @@ export const signUp = createAsyncThunk('login/SIGNUP', async (payload, thunkAPI)
 
 export const login = createAsyncThunk('login/LOGIN', async (payload, thunkAPI) => {
   try {
-    const response = await instance.post('/api/login', payload);
-    console.log(response.headers.authorization);
+    const response = await instance.post('/api/login', {
+      username: payload.username,
+      password: payload.password,
+    });
+    payload.setCookie('accessToken', response.headers.authorization, { path: '/' });
     return thunkAPI.fulfillWithValue(response.headers.authorization);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
 });
 
-// API에 주소 없음
+export const checkDuplicationId = createAsyncThunk(
+  'login/CHECK_DUPLICATION_ID',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await instance.get(`/api/signup-idcheck/${payload}`);
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
 
-// export const checkDuplicationId = createAsyncThunk(
-//   'login/CHECK_DUPLICATION_ID',
-//   async (payload, thunkAPI) => {
-//     try {
-//       const response = await axios.post('http://localhost:3001/api/', payload);
-//       return thunkAPI.fulfillWithValue(response.data);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   },
-// );
-
-// export const checkDuplicationNickname = createAsyncThunk(
-//   'login/CHECK_DUPLICATION_NICKNAME',
-//   async (payload, thunkAPI) => {
-//     try {
-//       const response = await axios.post('http://localhost:3001/api/', payload);
-//       return thunkAPI.fulfillWithValue(response.data);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   },
-// );
+export const checkDuplicationNickname = createAsyncThunk(
+  'login/CHECK_DUPLICATION_NICKNAME',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await instance.get(`/api/signup-nicknamecheck/${payload}`);
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
 
 const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {},
+  reducers: {
+    clearDuplicate: (state) => ({
+      ...state,
+      duplicate: { idDuplicate: true, nickDuplicate: true },
+    }),
+  },
   extraReducers: {
     [signUp.pending]: (state) => {
       state.isLoading = true;
     },
     [signUp.fulfilled]: (state, action) => {
-      console.log('test signup');
       state.isLoading = false;
     },
     [signUp.rejected]: (state, action) => {
-      console.log('test signup rejec');
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -75,17 +81,40 @@ const loginSlice = createSlice({
       state.isLoading = true;
     },
     [login.fulfilled]: (state, action) => {
-      const cookies = new Cookies();
-      cookies.set('accessToken', action.payload, { path: '/' });
-      console.log(cookies);
+      // const cookies = new Cookies();
+      // cookies.set('accessToken', action.payload, { path: '/' });
       state.isLoading = false;
     },
     [login.rejected]: (state, action) => {
-      console.log('login_rejec');
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [checkDuplicationId.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [checkDuplicationId.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.duplicate.idDuplicate = action.payload;
+    },
+    [checkDuplicationId.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [checkDuplicationNickname.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [checkDuplicationNickname.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.duplicate.nickDuplicate = action.payload;
+    },
+    [checkDuplicationNickname.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
   },
 });
 
+export const { clearDuplicate } = loginSlice.actions;
 export default loginSlice.reducer;

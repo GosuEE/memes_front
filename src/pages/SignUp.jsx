@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,36 +9,72 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { signUp } from '../redux/modules/loginSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkDuplicationId, checkDuplicationNickname, signUp } from '../redux/modules/loginSlice';
 const theme = createTheme();
 
 function SignUp() {
+  const [checkId, setCheckId] = useState(false);
+  const [checkNick, setCheckNick] = useState(false);
+  const [disable, setDisable] = useState(true);
+
+  const duplicate = useSelector((state) => state.login.duplicate);
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useState({
-    userName: '',
-    nickName: '',
-    password: '',
-  });
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
+  const [nickName, setNickName] = useState('');
+  const [password, setPassword] = useState('');
 
-  const inputChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    });
-  };
+  // const [inputValue, setInputValue] = useState({
+  //   userName: '',
+  //   nickName: '',
+  //   password: '',
+  // });
 
+  // const inputChangeHandler = (e) => {
+  //   const { name, value } = e.target;
+  //   setInputValue({
+  //     ...inputValue,
+  //     [name]: value,
+  //   });
+  // };
+
+  function userNameChangeHandler(event) {
+    setUserName(event.target.value);
+  }
+  function nickNameChangeHandler(event) {
+    setNickName(event.target.value);
+  }
+  function passwordChangeHandler(event) {
+    setPassword(event.target.value);
+  }
   const signUpHandler = (event) => {
     event.preventDefault();
     const account = {
-      username: inputValue.userName,
-      nickname: inputValue.nickName,
-      password: inputValue.password,
+      username: userName,
+      nickname: nickName,
+      password: password,
     };
     dispatch(signUp(account));
+    navigate('/');
   };
+
+  async function onCheckId() {
+    await dispatch(checkDuplicationId(userName));
+    console.log(duplicate.idDuplicate);
+  }
+
+  async function onCheckNick() {
+    await dispatch(checkDuplicationNickname(nickName));
+  }
+
+  useEffect(() => {
+    setCheckId((prev) => (prev = !duplicate.idDuplicate));
+    setCheckNick((prev) => (prev = !duplicate.nickDuplicate));
+    // console.log(checkId, checkNick);
+    if (!duplicate.idDuplicate && !duplicate.nickDuplicate) setDisable(false);
+  }, [duplicate.idDuplicate, duplicate.nickDuplicate]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -73,8 +109,8 @@ function SignUp() {
                   fullWidth
                   id="userName"
                   label="User Name"
-                  value={inputValue.userName}
-                  onChange={inputChangeHandler}
+                  value={userName}
+                  onChange={(event) => userNameChangeHandler(event)}
                   autoFocus
                 />
               </Grid>
@@ -85,8 +121,8 @@ function SignUp() {
                   id="nickName"
                   label="Nick Name"
                   name="nickName"
-                  value={inputValue.nickName}
-                  onChange={inputChangeHandler}
+                  value={nickName}
+                  onChange={(event) => nickNameChangeHandler(event)}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -99,8 +135,8 @@ function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
-                  value={inputValue.password}
-                  onChange={inputChangeHandler}
+                  value={password}
+                  onChange={(event) => passwordChangeHandler(event)}
                   autoComplete="new-password"
                 />
               </Grid>
@@ -118,6 +154,12 @@ function SignUp() {
             </Grid>
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign Up
+            </Button>
+            <Button variant="contained" onClick={onCheckId}>
+              아이디 중복 확인
+            </Button>
+            <Button variant="contained" onClick={onCheckNick}>
+              닉네임 중복 확인
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

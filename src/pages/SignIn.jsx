@@ -34,13 +34,14 @@ function SignIn() {
     });
   };
 
-  const loginHandler = (event) => {
+  const loginHandler = async (event) => {
     event.preventDefault();
     const account = {
       username: inputValue.userName,
       password: inputValue.password,
     };
-    dispatch(login(account));
+    await dispatch(login({ ...account, setCookie }));
+    navigate('/');
   };
 
   return (
