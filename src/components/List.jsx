@@ -33,7 +33,7 @@ function List({ memes }) {
           memes.map((meme) => (
             <Link to={`/detail/${meme.id}`}>
               <StBoxInner key={meme.id}>
-                <Card sx={{ width: 330 }}>
+                <Card sx={{ width: 330 }} style={cardStyle}>
                   <CardActionArea>
                     <Typography gutterBottom variant="h5" component="div">
                       {meme.title}
@@ -55,3 +55,7 @@ function List({ memes }) {
 }
 
 export default List;
+
+const cardStyle = {
+  height: '400px',
+};
