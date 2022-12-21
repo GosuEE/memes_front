@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { TextField, Paper, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { json, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ExampleMeme from './ExampleMeme';
 import { createMeme, getMemeById, updateMemes } from '../../redux/modules/postSlice';
 
 function InputForm({ isCreate }) {
   const [title, setTitle] = useState('');
-  const [img, setImg] = useState('');
+  const [img, setImg] = useState(null);
   const [showImg, setShowImg] = useState('');
   const [selectValue, setSelectValue] = useState('');
   const [firstMeme, setFirstMeme] = useState('');
@@ -31,7 +31,6 @@ function InputForm({ isCreate }) {
     formData.append('file', event.target.files[0]);
 
     setImg(event.target.files[0]);
-
     setShowImg(URL.createObjectURL(event.target.files[0]));
   }
 
@@ -83,6 +82,7 @@ function InputForm({ isCreate }) {
       setThirdMeme(() => nowMeme.exam3);
       setSelectValue(() => nowMeme.answerValue);
       setContents(() => nowMeme.contents);
+      setShowImg(() => nowMeme.img);
     }
   }, [isCreate, nowMeme]);
 

@@ -40,7 +40,7 @@ function SignIn() {
       username: inputValue.userName,
       password: inputValue.password,
     };
-    await dispatch(login(account));
+    await dispatch(login({ ...account, setCookie }));
     navigate('/');
   };
 
