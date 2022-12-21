@@ -9,7 +9,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import CreateIcon from '@mui/icons-material/Create';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { Cookies, useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 
 function Header() {
   const [isLogined, setIsLogined] = useState(false);
@@ -27,8 +27,6 @@ function Header() {
   // }, [isLogined]);
 
   useEffect(() => {
-    console.log('useEffect');
-    console.log(cookies.accessToken);
     if (cookies.accessToken) setIsLogined(true);
     else setIsLogined(false);
   }, [cookies.accessToken]);
