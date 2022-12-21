@@ -24,7 +24,7 @@ function CommentView() {
   const param = useParams();
   const [modifyContent, setModifyContent] = useState('');
   const comments = useSelector((state) => state.meme.meme.answerReplyList);
-
+  console.log(comments);
   const dispatch = useDispatch();
 
   async function updateCommentHandler(commentId) {
@@ -88,7 +88,7 @@ function CommentView() {
                 >
                   <AutoFixNormalIcon />
                 </IconButton>
-                <ListItemText primary={`${comment.content}`} />
+                <ListItemText primary={`${comment.comment}`} />
               </ListItem>
 
               <div id={comment.id} style={divStyle}>
