@@ -35,15 +35,18 @@ export const deleteComment = createAsyncThunk('meme/DELETE_COMMENTS', async (pay
   }
 });
 
-export const readComments = createAsyncThunk('meme/READ_COMMENTS', async (payload, thunkAPI) => {
-  try {
-    const response = await baseURL.get(`/comments?memeId=${payload}`);
-    console.log(response.data);
-    return thunkAPI.fulfillWithValue(response.data);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error);
-  }
-});
+export const readCommentsGetByMemeId = createAsyncThunk(
+  'meme/READ_COMMENTS',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await baseURL.get(`/comments?memeId=${payload}`);
+      console.log(response.data);
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
 
 export const updateComment = createAsyncThunk('meme/UPDATE_COMMENT', async (payload, thunkAPI) => {
   try {
@@ -82,14 +85,14 @@ const commentSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    [readComments.pending]: (state) => {
+    [readCommentsGetByMemeId.pending]: (state) => {
       state.isLoading = true;
     },
-    [readComments.fulfilled]: (state, action) => {
+    [readCommentsGetByMemeId.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.comments = action.payload;
     },
-    [readComments.rejected]: (state, action) => {
+    [readCommentsGetByMemeId.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

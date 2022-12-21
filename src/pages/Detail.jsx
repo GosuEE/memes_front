@@ -9,14 +9,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-<<<<<<< HEAD
-import PersonIcon from '@mui/icons-material/Person';
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
-import { Link, useParams } from 'react-router-dom';
-=======
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, useNavigate, useParams } from 'react-router-dom';
->>>>>>> 753ba62840c7d5d7025b723e2009e1a5a26084b0
 import { useDispatch, useSelector } from 'react-redux';
 import WirteComment from '../components/Detail/WriteComment';
 import { deleteMemes, getMemeById, giveAnswer } from '../redux/modules/postSlice';
@@ -28,11 +22,8 @@ function Detail() {
   const { memeId } = useParams();
   const [answerValue, setAnswerValue] = useState();
   const meme = useSelector((state) => state.meme.meme);
-<<<<<<< HEAD
-=======
   const navigate = useNavigate();
 
->>>>>>> 753ba62840c7d5d7025b723e2009e1a5a26084b0
   const dispatch = useDispatch();
 
   const getMeme = useCallback(() => {
@@ -51,21 +42,11 @@ function Detail() {
     <>
       <StBoxOuter>
         <StBox>
-          <h1>작성자: {meme.nickname}</h1>
-          <h1>{meme.title}</h1>
-          <Button
-            onClick={onDeleteHandler}
-            sx={{ mt: 2, ml: '15px' }}
-            color="error"
-            variant="outlined"
-          >
-            삭제
-          </Button>
-          <Link to={`/update/${memeId}`}>
-            <Button sx={{ mt: 2, ml: '15px' }} variant="outlined">
-              수정
-            </Button>
-          </Link>
+          <h1>
+            <AccountCircleIcon /> {meme.nickname}
+          </h1>
+          <h1 style={titleStyle}>{meme.title}</h1>
+
           <Box
             sx={{
               display: 'flex',
@@ -101,6 +82,7 @@ function Detail() {
               }}
             />
           </Box>
+          {/* {meme.boardUser?} */}
           <Link to="/">
             <Button
               onClick={() => dispatch(deleteMemes(memeId))}
@@ -226,7 +208,8 @@ const RadioGroupOuter = styled.div`
 `;
 
 const titleStyle = {
-  fontSize: '25px',
+  marginTop: '20px',
+  fontSize: '30px',
   fontWeight: 'bold',
 };
 const inputStyle = {
