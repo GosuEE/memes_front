@@ -42,11 +42,12 @@ function Detail() {
     <>
       <StBoxOuter>
         <StBox>
-          <h1>
-            <AccountCircleIcon /> {meme.nickname}
-          </h1>
-          <h1 style={titleStyle}>{meme.title}</h1>
-
+          <StTitle>
+            <h1>
+              <AccountCircleIcon /> {meme.nickname}
+            </h1>
+            <h1 style={titleStyle}>{meme.title}</h1>
+          </StTitle>
           <Box
             sx={{
               display: 'flex',
@@ -82,22 +83,28 @@ function Detail() {
               }}
             />
           </Box>
-          {/* {meme.boardUser?} */}
-          <Link to="/">
-            <Button
-              onClick={() => dispatch(deleteMemes(memeId))}
-              sx={{ mt: 2, ml: '15px' }}
-              color="error"
-              variant="outlined"
-            >
-              삭제
-            </Button>
-          </Link>
-          <Link to={`/update/${memeId}`}>
-            <Button sx={{ mt: 2, ml: '15px' }} variant="outlined">
-              수정
-            </Button>
-          </Link>
+          {meme.boardUser ? (
+            <>
+              {' '}
+              <Link to="/" style={linkStyle}>
+                <Button
+                  onClick={() => dispatch(deleteMemes(memeId))}
+                  sx={{ mt: 2, ml: '15px' }}
+                  color="error"
+                  variant="outlined"
+                >
+                  삭제
+                </Button>
+              </Link>
+              <Link to={`/update/${memeId}`} style={linkStyle}>
+                <Button sx={{ mt: 2, ml: '15px' }} variant="outlined">
+                  수정
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <></>
+          )}
 
           {meme.correct ? (
             <></>
@@ -220,6 +227,10 @@ const inputStyle = {
 const h1Style = {
   marginTop: '20px',
   color: 'red',
+};
+
+const linkStyle = {
+  textDecoration: 'none',
 };
 
 const iconStyle = {

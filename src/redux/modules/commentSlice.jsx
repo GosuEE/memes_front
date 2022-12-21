@@ -39,7 +39,8 @@ export const readCommentsGetByMemeId = createAsyncThunk(
   'meme/READ_COMMENTS',
   async (payload, thunkAPI) => {
     try {
-      const response = await baseURL.get(`/comments?memeId=${payload}`);
+      console.log(payload);
+      const response = await baseURL.get(`/api/memecommentlist/${payload}`);
       console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
