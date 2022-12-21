@@ -49,7 +49,7 @@ export const readMemes = createAsyncThunk('meme/READ_MEMES', async (payload, thu
 
 export const updateMemes = createAsyncThunk('meme/UPDATE_MEMES', async (payload, thunkAPI) => {
   try {
-    const response = await baseURL.patch(`/memes/${payload.id}`, {
+    const response = await baseURL.patch(`/api/meme/${payload.id}`, {
       title: payload.title,
       img: payload.img,
       contents: payload.contents,
@@ -66,7 +66,7 @@ export const updateMemes = createAsyncThunk('meme/UPDATE_MEMES', async (payload,
 
 export const deleteMemes = createAsyncThunk('meme/DELETE_MEMES', async (payload, thunkAPI) => {
   try {
-    const response = await baseURL.delete(`/memes/${payload}`);
+    const response = await baseURL.delete(`/meme/${payload}`);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);

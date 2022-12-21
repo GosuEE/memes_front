@@ -16,10 +16,9 @@ export const createComment = createAsyncThunk(
   'Comment/CREATE_COMMENT',
   async (payload, thunkAPI) => {
     try {
-      const response = await baseURL.post(
-        `/api/meme/${payload.memeId}`,
-        JSON.stringify({ comment: payload.content }),
-      );
+      const response = await baseURL.post(`/api/meme/${payload.memeId}`, {
+        comment: payload.content,
+      });
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -38,7 +37,7 @@ export const deleteComment = createAsyncThunk('meme/DELETE_COMMENTS', async (pay
 
 export const readComments = createAsyncThunk('meme/READ_COMMENTS', async (payload, thunkAPI) => {
   try {
-    const response = await instance.get(`/comments?memeId=${payload}`);
+    const response = await baseURL.get(`/comments?memeId=${payload}`);
     console.log(response.data);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
@@ -48,8 +47,9 @@ export const readComments = createAsyncThunk('meme/READ_COMMENTS', async (payloa
 
 export const updateComment = createAsyncThunk('meme/UPDATE_COMMENT', async (payload, thunkAPI) => {
   try {
-    const data = JSON.stringify({ comment: payload.content });
-    const response = await instance.patch(`/api/memecomment/${payload.id}`, data);
+    const response = await baseURL.patch(`/api/memecomment/${payload.id}`, {
+      comment: payload.content,
+    });
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
