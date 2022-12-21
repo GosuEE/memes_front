@@ -23,14 +23,14 @@ import { getMemeById } from '../../redux/modules/postSlice';
 function CommentView() {
   const param = useParams();
   const [modifyContent, setModifyContent] = useState('');
-  const comments = useSelector((state) => state.meme.answerReplyList);
+  const comments = useSelector((state) => state.meme.meme.answerReplyList);
 
   const dispatch = useDispatch();
 
   async function updateCommentHandler(commentId) {
     alert('수정완료');
     await dispatch(updateComment({ id: commentId, content: modifyContent }));
-    dispatch(readComments(param.memeId));
+    dispatch(getMemeById(param.memeId));
     setModifyContent('');
     const showBox = document.getElementById(commentId);
     showBox.style.display = 'none';
@@ -39,7 +39,7 @@ function CommentView() {
   async function deleteCommentHandler(commentId) {
     alert('삭제완료');
     await dispatch(deleteComment(commentId));
-    dispatch(readComments(param.memeId));
+    dispatch(getMemeById(param.memeId));
   }
 
   const dispatchReadComments = useCallback(() => {
