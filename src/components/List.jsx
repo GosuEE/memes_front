@@ -31,13 +31,14 @@ function List({ memes }) {
       <StBox>
         {memes &&
           memes.map((meme) => (
-            <Link to={`/detail/${meme.id}`}>
+            <Link to={`/detail/${meme.id}`} style={linkStyle}>
               <StBoxInner key={meme.id}>
                 <Card sx={{ width: 330 }} style={cardStyle}>
                   <CardActionArea>
                     <Typography gutterBottom variant="h5" component="div">
                       {meme.title}
                     </Typography>
+                    <hr />
                     <CardMedia component="img" height="260" image={meme.img} alt="img" />
                     {/* <CardContent>
                     <Typography variant="body2" minWidth="330px" color="text.secondary">
@@ -58,4 +59,9 @@ export default List;
 
 const cardStyle = {
   height: '400px',
+};
+
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'black',
 };

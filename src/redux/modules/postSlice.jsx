@@ -65,6 +65,19 @@ export const updateMemes = createAsyncThunk('meme/UPDATE_MEMES', async (payload,
   }
 });
 
+export const giveAnswer = createAsyncThunk('meme/GIVE_ANSWER', async (payload, thunkAPI) => {
+  try {
+    console.log(payload);
+
+    const response = await baseURL.post(`api/memeanswer/${payload.memeid}`, {
+      answerValue: payload.answerValue,
+    });
+    return thunkAPI.fulfillWithValue(response.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 export const deleteMemes = createAsyncThunk('meme/DELETE_MEMES', async (payload, thunkAPI) => {
   try {
     const response = await baseURL.delete(`api/meme/${payload}`);
@@ -88,6 +101,16 @@ const postSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [giveAnswer.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [giveAnswer.fulfilled]: (state, action) => {
+      state.isLoading = false;
+    },
+    [giveAnswer.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
     [createMeme.pending]: (state) => {
       state.isLoading = true;
     },
