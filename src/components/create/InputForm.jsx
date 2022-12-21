@@ -39,7 +39,7 @@ function InputForm({ isCreate }) {
     inputRef.current.click();
   }
 
-  function onSubmitHandler() {
+  async function onSubmitHandler() {
     const meme = {
       title,
       contents: contents,
@@ -48,11 +48,11 @@ function InputForm({ isCreate }) {
       exam2: secondMeme,
       exam3: thirdMeme,
     };
-    dispatch(createMeme({ meme: meme, img: img }));
+    await dispatch(createMeme({ meme: meme, img: img }));
     navigate('/');
   }
 
-  function onUpdateHandler() {
+  async function onUpdateHandler() {
     const meme = {
       title,
       id: memeId,
@@ -62,7 +62,7 @@ function InputForm({ isCreate }) {
       exam2: secondMeme,
       exam3: thirdMeme,
     };
-    dispatch(updateMemes({ meme: meme, img: img }));
+    await dispatch(updateMemes({ meme: meme, img: img }));
     navigate(`/detail/${memeId}`);
   }
 
@@ -78,10 +78,10 @@ function InputForm({ isCreate }) {
     if (!isCreate) {
       setTitle(() => nowMeme.title);
       setImg(() => nowMeme.img);
-      setSelectValue(() => nowMeme.answerValue);
       setFirstMeme(() => nowMeme.exam1);
       setSecondMeme(() => nowMeme.exam2);
       setThirdMeme(() => nowMeme.exam3);
+      setSelectValue(() => nowMeme.answerValue);
       setContents(() => nowMeme.contents);
     }
   }, [isCreate, nowMeme]);
