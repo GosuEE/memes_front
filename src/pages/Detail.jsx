@@ -10,7 +10,7 @@ import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import WirteComment from '../components/Detail/WriteComment';
 import { deleteMemes, getMemeById } from '../redux/modules/postSlice';
@@ -20,12 +20,18 @@ import CommentView from '../components/Detail/CommentView';
 function Detail() {
   const { memeId } = useParams();
   const meme = useSelector((state) => state.meme.meme);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const getMeme = useCallback(() => {
     dispatch(getMemeById(memeId));
   }, [dispatch, memeId]);
+
+  async function onDeleteHandler() {
+    await dispatch(deleteMemes(memeId));
+    navigate('/');
+  }
 
   useEffect(() => {
     getMeme();
@@ -35,16 +41,14 @@ function Detail() {
       <StBoxOuter>
         <StBox>
           <h1>{meme.title}</h1>
-          <Link to="/">
-            <Button
-              onClick={() => dispatch(deleteMemes(memeId))}
-              sx={{ mt: 2, ml: '15px' }}
-              color="error"
-              variant="outlined"
-            >
-              삭제
-            </Button>
-          </Link>
+          <Button
+            onClick={onDeleteHandler}
+            sx={{ mt: 2, ml: '15px' }}
+            color="error"
+            variant="outlined"
+          >
+            삭제
+          </Button>
           <Link to={`/update/${memeId}`}>
             <Button sx={{ mt: 2, ml: '15px' }} variant="outlined">
               수정

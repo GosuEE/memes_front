@@ -6,7 +6,6 @@ import { readMemes } from '../redux/modules/postSlice';
 function Main() {
   const dispatch = useDispatch();
   const memes = useSelector((state) => state.meme.memes);
-  console.log(memes);
 
   const dispatchReadMemes = useCallback(() => {
     dispatch(readMemes());
