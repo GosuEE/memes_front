@@ -54,7 +54,7 @@ function SignUp() {
       password: password,
     };
     dispatch(signUp(account));
-    navigate('/');
+    navigate('/signin');
   };
 
   function onCheckId() {
@@ -68,7 +68,6 @@ function SignUp() {
   useEffect(() => {
     setCheckId(!duplicate.idDuplicate);
     setCheckNick(!duplicate.nickDuplicate);
-    if (!duplicate.idDuplicate && !duplicate.nickDuplicate) setDisable(false);
   }, [duplicate.idDuplicate, duplicate.nickDuplicate]);
 
   useEffect(() => {
