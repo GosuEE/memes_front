@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { baseURL, instance } from '../../core/api/axios';
 import { Cookies } from 'react-cookie';
+import { DashboardSharp } from '@material-ui/icons';
 
 const initialState = {
   memes: [],
@@ -67,8 +68,6 @@ export const updateMemes = createAsyncThunk('meme/UPDATE_MEMES', async (payload,
 
 export const giveAnswer = createAsyncThunk('meme/GIVE_ANSWER', async (payload, thunkAPI) => {
   try {
-    console.log(payload);
-
     const response = await baseURL.post(`api/memeanswer/${payload.memeid}`, {
       answerValue: payload.answerValue,
     });
