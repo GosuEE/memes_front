@@ -64,6 +64,17 @@ const loginSlice = createSlice({
       ...state,
       duplicate: { idDuplicate: true, nickDuplicate: true },
     }),
+    clearIdDuplicate: (state) => ({
+      ...state,
+      duplicate: { idDuplicate: true, nickDuplicate: state.duplicate.nickDuplicate },
+    }),
+    clearNickDuplicate: (state) => ({
+      ...state,
+      duplicate: {
+        idDuplicate: state.duplicate.idDuplicate,
+        nickDuplicate: true,
+      },
+    }),
   },
   extraReducers: {
     [signUp.pending]: (state) => {
@@ -116,5 +127,5 @@ const loginSlice = createSlice({
   },
 });
 
-export const { clearDuplicate } = loginSlice.actions;
+export const { clearDuplicate, clearIdDuplicate, clearNickDuplicate } = loginSlice.actions;
 export default loginSlice.reducer;

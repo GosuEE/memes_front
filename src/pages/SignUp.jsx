@@ -11,7 +11,14 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkDuplicationId, checkDuplicationNickname, signUp } from '../redux/modules/loginSlice';
+import {
+  checkDuplicationId,
+  checkDuplicationNickname,
+  clearDuplicate,
+  clearIdDuplicate,
+  clearNickDuplicate,
+  signUp,
+} from '../redux/modules/loginSlice';
 const theme = createTheme();
 
 function SignUp() {
@@ -26,25 +33,15 @@ function SignUp() {
   const [nickName, setNickName] = useState('');
   const [password, setPassword] = useState('');
 
-  // const [inputValue, setInputValue] = useState({
-  //   userName: '',
-  //   nickName: '',
-  //   password: '',
-  // });
-
-  // const inputChangeHandler = (e) => {
-  //   const { name, value } = e.target;
-  //   setInputValue({
-  //     ...inputValue,
-  //     [name]: value,
-  //   });
-  // };
-
   function userNameChangeHandler(event) {
     setUserName(event.target.value);
+    setCheckId(false);
+    dispatch(clearIdDuplicate());
   }
   function nickNameChangeHandler(event) {
     setNickName(event.target.value);
+    setCheckNick(false);
+    dispatch(clearNickDuplicate());
   }
   function passwordChangeHandler(event) {
     setPassword(event.target.value);
@@ -60,21 +57,24 @@ function SignUp() {
     navigate('/');
   };
 
-  async function onCheckId() {
-    await dispatch(checkDuplicationId(userName));
-    console.log(duplicate.idDuplicate);
+  function onCheckId() {
+    dispatch(checkDuplicationId(userName));
   }
 
-  async function onCheckNick() {
-    await dispatch(checkDuplicationNickname(nickName));
+  function onCheckNick() {
+    dispatch(checkDuplicationNickname(nickName));
   }
 
   useEffect(() => {
-    setCheckId((prev) => (prev = !duplicate.idDuplicate));
-    setCheckNick((prev) => (prev = !duplicate.nickDuplicate));
-    // console.log(checkId, checkNick);
+    setCheckId(!duplicate.idDuplicate);
+    setCheckNick(!duplicate.nickDuplicate);
     if (!duplicate.idDuplicate && !duplicate.nickDuplicate) setDisable(false);
   }, [duplicate.idDuplicate, duplicate.nickDuplicate]);
+
+  useEffect(() => {
+    if (checkId && checkNick) setDisable(false);
+    else setDisable(true);
+  }, [checkId, checkNick]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -152,13 +152,28 @@ function SignUp() {
                 />
               </Grid>
             </Grid>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button
+              disabled={disable}
+              type="submit"
+              fullWidth
+              variant="contained"
+              onClick={() => dispatch(clearDuplicate())}
+              sx={{ mt: 3, mb: 2 }}
+            >
               Sign Up
             </Button>
-            <Button variant="contained" onClick={onCheckId}>
+            <Button
+              sx={{ float: 'left', width: '45%', mb: 1 }}
+              variant="contained"
+              onClick={onCheckId}
+            >
               아이디 중복 확인
             </Button>
-            <Button variant="contained" onClick={onCheckNick}>
+            <Button
+              sx={{ float: 'right', width: '45%', mb: 1 }}
+              variant="contained"
+              onClick={onCheckNick}
+            >
               닉네임 중복 확인
             </Button>
             <Grid container justifyContent="flex-end">
