@@ -17,20 +17,21 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
-import { display } from '@mui/system';
-import { getMemeById } from '../../redux/modules/postSlice';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
+
+import { readCommentsGetByMemeId } from '../../redux/modules/commentSlice';
 
 function CommentView() {
   const param = useParams();
   const [modifyContent, setModifyContent] = useState('');
-  const comments = useSelector((state) => state.meme.meme.answerReplyList);
+  const comments = useSelector((state) => state.comment.comments);
   console.log(comments);
   const dispatch = useDispatch();
 
   async function updateCommentHandler(commentId) {
     alert('수정완료');
     await dispatch(updateComment({ id: commentId, content: modifyContent }));
-    dispatch(getMemeById(param.memeId));
+    dispatch(readCommentsGetByMemeId(param.memeId));
     setModifyContent('');
     const showBox = document.getElementById(commentId);
     showBox.style.display = 'none';
@@ -39,11 +40,11 @@ function CommentView() {
   async function deleteCommentHandler(commentId) {
     alert('삭제완료');
     await dispatch(deleteComment(commentId));
-    dispatch(getMemeById(param.memeId));
+    dispatch(readCommentsGetByMemeId(param.memeId));
   }
 
   const dispatchReadComments = useCallback(() => {
-    dispatch(getMemeById(param.memeId));
+    dispatch(readCommentsGetByMemeId(param.memeId));
   }, [dispatch]);
 
   useEffect(() => {
@@ -63,32 +64,35 @@ function CommentView() {
         {comments?.map((comment) => {
           return (
             <>
-              <ListItem
-                key={comment.id}
-                disableGutters
-                secondaryAction={
-                  <IconButton
-                    aria-label="comment"
-                    type="button"
-                    onClick={() => {
-                      deleteCommentHandler(comment.id);
-                    }}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                }
-              >
-                <IconButton
-                  aria-label="comment"
-                  type="button"
-                  id="show"
-                  onClick={() => {
-                    selectHandler(comment.id);
-                  }}
-                >
-                  <AutoFixNormalIcon />
-                </IconButton>
+              <ListItem key={comment.id} disableGutters>
+                <EmojiPeopleIcon />
                 <ListItemText primary={`${comment.nickname}` + ' :' + `${comment.comment}`} />
+                {comment.iscorrect ? (
+                  <>
+                    {' '}
+                    <IconButton
+                      aria-label="comment"
+                      type="button"
+                      id="show"
+                      onClick={() => {
+                        selectHandler(comment.id);
+                      }}
+                    >
+                      <AutoFixNormalIcon />
+                    </IconButton>
+                    <IconButton
+                      aria-label="comment"
+                      type="button"
+                      onClick={() => {
+                        deleteCommentHandler(comment.id);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </>
+                ) : (
+                  <></>
+                )}
               </ListItem>
 
               <div id={comment.id} style={divStyle}>

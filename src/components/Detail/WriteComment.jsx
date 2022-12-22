@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { getMemeById } from '../../redux/modules/postSlice';
+import { readCommentsGetByMemeId } from '../../redux/modules/commentSlice';
 
 function WirteComment() {
   const [commentContent, setCommentContent] = useState('');
@@ -22,7 +23,7 @@ function WirteComment() {
   const dispatchCreateComment = async () => {
     alert('작성완료');
     await dispatch(createComment(comment));
-    dispatch(getMemeById(param.memeId));
+    dispatch(readCommentsGetByMemeId(param.memeId));
     setCommentContent('');
   };
 
