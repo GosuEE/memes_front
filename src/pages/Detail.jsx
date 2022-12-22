@@ -126,7 +126,6 @@ function Detail() {
                     label={meme.exam1}
                     onChange={(e) => {
                       setAnswerValue(1);
-                      console.log(answerValue);
                     }}
                   />
                   <FormControlLabel
@@ -135,7 +134,6 @@ function Detail() {
                     label={meme.exam2}
                     onChange={(e) => {
                       setAnswerValue(2);
-                      console.log(answerValue);
                     }}
                   />
                   <FormControlLabel
@@ -144,7 +142,6 @@ function Detail() {
                     label={meme.exam3}
                     onChange={(e) => {
                       setAnswerValue(3);
-                      console.log(answerValue);
                     }}
                   />
                 </RadioGroup>

@@ -46,7 +46,6 @@ function WirteComment() {
             value={commentContent}
             onChange={(e) => {
               setCommentContent(e.target.value);
-              console.log(comment);
             }}
           />
           <ButtonOuter>

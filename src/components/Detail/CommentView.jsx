@@ -25,7 +25,6 @@ function CommentView() {
   const param = useParams();
   const [modifyContent, setModifyContent] = useState('');
   const comments = useSelector((state) => state.comment.comments);
-  console.log(comments);
   const dispatch = useDispatch();
 
   async function updateCommentHandler(commentId) {

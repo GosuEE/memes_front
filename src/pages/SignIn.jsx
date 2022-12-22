@@ -106,7 +106,6 @@ function SignIn() {
           </Box>
         </Container>
       </ThemeProvider>
-      );
     </div>
   );
 }

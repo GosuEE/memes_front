@@ -16,16 +16,6 @@ function Header() {
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
   const navigate = useNavigate();
 
-  // const toggleIsLogined = useCallback(() => {
-  //   if (cookies.accessToken) setIsLogined(true);
-  //   else setIsLogined(false);
-  //   console.log(isLogined);
-  // }, [isLogined, cookies]);
-
-  // useEffect(() => {
-  //   toggleIsLogined();
-  // }, [isLogined]);
-
   useEffect(() => {
     if (cookies.accessToken) setIsLogined(true);
     else setIsLogined(false);

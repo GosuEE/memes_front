@@ -15,7 +15,6 @@ export const baseURL = axios.create({
   },
 });
 
-//인스턴스 request header
 baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
   const cookies = new Cookies();
